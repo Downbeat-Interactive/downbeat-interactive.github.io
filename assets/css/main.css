@@ -50,6 +50,56 @@
 }
 
 
+
+/*Jackson Custom*/
+.feature-content{
+    text-align: left; 
+    word-wrap: break-word; 
+}
+
+.feature-list{
+    display: inline-block; text-align: left;
+   
+}
+.feature-title{
+    color:black; 
+    font-size: 6vh;
+   
+}
+
+
+
+.no-bullets{
+    list-style: none outside;
+}
+
+.error{
+    text-transform: capitalize;
+    background-color: snow !important;
+    margin: auto;
+    padding: 10vh 0 10vh 0;
+    
+}
+
+
+.downbeat-footer{
+    background-color: #faf8e0; 
+    height: 10vh
+}
+
+.downbeat-copyright{
+    background-color: #faf8e0;
+    padding-bottom: 2vh
+
+}
+
+.no-decoration{
+    text-decoration: none;
+}
+
+/*End Jackson Custom*/
+
+
 /* Reset */
 
 html,

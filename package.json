@@ -1,0 +1,21 @@
+{
+  "name": "downbeat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gameFeature.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-DOWNBEAT:Downbeat-Interactive/downbeat-interactive.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
+    "react": "^17.0.1"
+  }
+}
