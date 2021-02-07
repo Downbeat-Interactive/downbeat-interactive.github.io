@@ -36,7 +36,7 @@ export default [
         url: '/balance-run',
         videoUrl:'',
         videoDimensions: [undefined, undefined],
-        storeUrl:'',
+        storeUrl:'https://play.google.com/store/apps/details?id=com.downbeat.polebalance',
         description: 'Coming Soon'
     },
 
@@ -45,7 +45,7 @@ export default [
         title: 'Parkour Run',
         subtitle: 'Coming Soon',
         url: '/parkour-run',
-        videoUrl:'',
+        videoUrl:'https://youtube.com/embed/gjkYDLshdtU',
         videoDimensions: [undefined, undefined],
         storeUrl:'',
         description: 'Coming Soon'
