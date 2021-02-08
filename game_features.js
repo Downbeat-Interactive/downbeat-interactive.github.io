@@ -8,7 +8,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import data from './data.js';
 import ErrorBoundary from './error_boundary.js';
 
 var FeatureStoreButton = function (_React$Component) {
@@ -28,7 +27,7 @@ var FeatureStoreButton = function (_React$Component) {
     value: function render() {
       if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) return React.createElement(
         'a',
-        { href: this.props.storeUrl },
+        { target: '_blank', href: this.props.url },
         React.createElement('img', { className: 'image-button', src: '/images/google-play-download.png', alt: 'See on Google Play' })
       );else return React.createElement('div', null);
     }
@@ -52,73 +51,40 @@ var FeatureVideo = function (_React$Component2) {
   _createClass(FeatureVideo, [{
     key: 'render',
     value: function render() {
-      if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) return React.createElement(
-        ErrorBoundary,
-        { showBack: false },
-        React.createElement(
-          'div',
-          { className: 'iframe-container align-center' },
-          React.createElement('iframe', { className: 'feature-iframe',
-            width: this.props.width,
-            height: this.props.height,
-            src: this.props.url,
-            frameBorder: '0',
-            allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
-            allowFullScreen: true
-          })
-        )
-      );else return React.createElement('div', null);
+      if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) {
+        return React.createElement(
+          ErrorBoundary,
+          { showBack: false },
+          React.createElement(
+            'div',
+            { id: this.props.id + "-video", className: 'iframe-container align-center' },
+            React.createElement('iframe', { className: 'feature-iframe',
+              width: this.props.width,
+              height: this.props.height,
+              src: this.props.url,
+              frameBorder: '0',
+              allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+              allowFullScreen: true
+            })
+          )
+        );
+      } else return React.createElement('div', null);
     }
   }]);
 
   return FeatureVideo;
 }(React.Component);
 
-var HomePageFeatures = function (_React$Component3) {
-  _inherits(HomePageFeatures, _React$Component3);
-
-  function HomePageFeatures() {
-    _classCallCheck(this, HomePageFeatures);
-
-    return _possibleConstructorReturn(this, (HomePageFeatures.__proto__ || Object.getPrototypeOf(HomePageFeatures)).apply(this, arguments));
-  }
-
-  _createClass(HomePageFeatures, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        ErrorBoundary,
-        { showBack: true },
-        data.map(function (game) {
-          return React.createElement(GameFeatureFull, {
-            key: game.id,
-            id: game.id,
-            title: game.title,
-            url: game.url,
-            description: game.description,
-            videoUrl: game.videoUrl,
-            storeUrl: game.storeUrl,
-            subtitle: game.subtitle,
-            videoDimensions: game.videoDimensions
-          });
-        })
-      );
-    }
-  }]);
-
-  return HomePageFeatures;
-}(React.Component);
-
-var GameFeatureFull = function (_React$Component4) {
-  _inherits(GameFeatureFull, _React$Component4);
+var GameFeatureFull = function (_React$Component3) {
+  _inherits(GameFeatureFull, _React$Component3);
 
   function GameFeatureFull(props) {
     _classCallCheck(this, GameFeatureFull);
 
-    var _this4 = _possibleConstructorReturn(this, (GameFeatureFull.__proto__ || Object.getPrototypeOf(GameFeatureFull)).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, (GameFeatureFull.__proto__ || Object.getPrototypeOf(GameFeatureFull)).call(this, props));
 
-    _this4.props = props;
-    return _this4;
+    _this3.props = props;
+    return _this3;
   }
 
   _createClass(GameFeatureFull, [{
@@ -136,7 +102,7 @@ var GameFeatureFull = function (_React$Component4) {
             React.createElement(
               'div',
               { id: this.props.id, 'data-aos': 'fade-right', 'data-aos-delay': '100', className: 'box align-center' },
-              React.createElement(FeatureVideo, { url: this.props.videoUrl }),
+              React.createElement(FeatureVideo, { url: this.props.videoUrl, id: this.props.id }),
               React.createElement(
                 'div',
                 { className: 'content' },
@@ -162,6 +128,7 @@ var GameFeatureFull = function (_React$Component4) {
                   'div',
                   { className: 'align-center feature-content', 'data-aos': 'fade-up' },
                   React.createElement('div', { dangerouslySetInnerHTML: { __html: this.props.description, sanitize: true } }),
+                  React.createElement('br', null),
                   React.createElement(
                     'a',
                     { href: this.props.url },
@@ -198,4 +165,4 @@ var GameFeatureFull = function (_React$Component4) {
   return GameFeatureFull;
 }(React.Component);
 
-export default HomePageFeatures;
+export default GameFeatureFull;

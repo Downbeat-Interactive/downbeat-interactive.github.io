@@ -2,6 +2,7 @@ export default [{
     id: 'dandy-drift',
     title: 'Dandy Drift',
     subtitle: 'Relaxing Runner',
+    bannerImg: '',
     url: '/dandy-drift',
     videoUrl: 'https://www.youtube.com/embed/ALo7LZK3vUU',
     videoDimensions: [undefined, undefined],
@@ -19,28 +20,36 @@ export default [{
 }, {
     id: 'road-trip-rush',
     title: 'Road Trip Rush',
-    subtitle: 'Coming Soon',
-    url: '/dandy-drift',
+    subtitle: 'Frantic Dash',
+    bannerImg: '',
+    url: '/road-trip-rush',
     videoUrl: 'https://www.youtube.com/embed/eqQxFkQ41Bo',
     storeUrl: 'https://play.google.com/store/apps/details?id=com.Jackson.DebrisDash',
     videoDimensions: [560, 315],
-    description: 'Coming Soon'
+    description: 'You\'re rushing down the highway at top speed with no control. Frantically drag obstacles out of the road before you crash!\
+            <br/><br/>In Road Trip Rush, you don\'t control the car. Instead, you have to move physically-simulated debris out of the road by dragging and flicking.\
+        '
 }, {
     id: 'balance-run',
     title: 'Balance Run',
-    subtitle: 'Coming Soon',
+    subtitle: 'Intense focus',
+    bannerImg: '',
     url: '/balance-run',
-    videoUrl: '',
+    videoUrl: 'https://youtube.com/embed/QE5_AcfeJ7E',
     videoDimensions: [undefined, undefined],
     storeUrl: 'https://play.google.com/store/apps/details?id=com.downbeat.polebalance',
-    description: 'Coming Soon'
+    description: 'Keep yourself balanced by moving blocks left or right as you run high above the ground. \
+        <br/>Try not to fall!'
 }, {
     id: 'parkour-run',
     title: 'Parkour Run',
-    subtitle: 'Coming Soon',
+    subtitle: 'Precise Action',
+    bannerImg: '',
     url: '/parkour-run',
     videoUrl: 'https://youtube.com/embed/gjkYDLshdtU',
     videoDimensions: [undefined, undefined],
-    storeUrl: '',
-    description: 'Coming Soon'
+    storeUrl: 'https://play.google.com/store/apps/details?id=com.downbeat.swiperun',
+    description: 'Swipe obstacles out of the way as you sprint along the rooftops!\
+            <br/>Can you make it to the goal?\
+        '
 }];

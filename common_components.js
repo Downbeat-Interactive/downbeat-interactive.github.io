@@ -8,17 +8,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import HomePageFeatures from './game_features.js';
 import ErrorBoundary from './error_boundary.js';
-var domContainer = document.querySelector('#app_container');
+import data from './game_data.js';
 
 var NavigationMenu = function (_React$Component) {
   _inherits(NavigationMenu, _React$Component);
 
-  function NavigationMenu() {
+  function NavigationMenu(props) {
     _classCallCheck(this, NavigationMenu);
 
-    return _possibleConstructorReturn(this, (NavigationMenu.__proto__ || Object.getPrototypeOf(NavigationMenu)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (NavigationMenu.__proto__ || Object.getPrototypeOf(NavigationMenu)).call(this, props));
+
+    _this.props = props;
+    return _this;
   }
 
   _createClass(NavigationMenu, [{
@@ -41,7 +43,21 @@ var NavigationMenu = function (_React$Component) {
                 { href: '/' },
                 'Home'
               )
-            )
+            ),
+            data.map(function (game) {
+              return React.createElement(
+                'li',
+                {
+                  key: game.id,
+                  title: game.title
+                },
+                React.createElement(
+                  'a',
+                  { href: "/#" + game.id },
+                  game.title
+                )
+              );
+            })
           )
         )
       );
@@ -51,62 +67,8 @@ var NavigationMenu = function (_React$Component) {
   return NavigationMenu;
 }(React.Component);
 
-var HomePageBanner = function (_React$Component2) {
-  _inherits(HomePageBanner, _React$Component2);
-
-  function HomePageBanner(props) {
-    _classCallCheck(this, HomePageBanner);
-
-    var _this2 = _possibleConstructorReturn(this, (HomePageBanner.__proto__ || Object.getPrototypeOf(HomePageBanner)).call(this, props));
-
-    _this2.props = props;
-    return _this2;
-  }
-
-  _createClass(HomePageBanner, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'section',
-        { id: 'top-banner', className: 'banner full' },
-        React.createElement(
-          'article',
-          null,
-          React.createElement(
-            'video',
-            { loop: true, muted: true, poster: 'images/intro.png' },
-            React.createElement('source', { src: 'images/intro.webm', type: 'video/webm' }),
-            React.createElement('source', { src: 'images/intro.mp4', type: 'video/mp4' }),
-            React.createElement('img', { id: 'first-img', src: 'images/intro.png', alt: '' })
-          ),
-          React.createElement(
-            'div',
-            { className: 'inner' },
-            React.createElement(
-              'a',
-              { href: '#about' },
-              React.createElement(
-                'header',
-                null,
-                React.createElement('p', null),
-                React.createElement(
-                  'h2',
-                  null,
-                  'About'
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return HomePageBanner;
-}(React.Component);
-
-var Header = function (_React$Component3) {
-  _inherits(Header, _React$Component3);
+var Header = function (_React$Component2) {
+  _inherits(Header, _React$Component2);
 
   function Header() {
     _classCallCheck(this, Header);
@@ -128,7 +90,7 @@ var Header = function (_React$Component3) {
             { className: 'logo' },
             React.createElement(
               'a',
-              { href: '/downbeat/' },
+              { href: '/' },
               'Downbeat ',
               React.createElement(
                 'span',
@@ -150,8 +112,8 @@ var Header = function (_React$Component3) {
   return Header;
 }(React.Component);
 
-var Socials = function (_React$Component4) {
-  _inherits(Socials, _React$Component4);
+var Socials = function (_React$Component3) {
+  _inherits(Socials, _React$Component3);
 
   function Socials() {
     _classCallCheck(this, Socials);
@@ -243,7 +205,7 @@ var Socials = function (_React$Component4) {
               'a',
               {
                 target: '_blank ',
-                href: 'https://lydianchromatic.itch.io/ ',
+                href: 'https://downbeat-interactive.itch.io/',
                 className: 'icon fa-itch-io '
               },
               React.createElement(
@@ -260,7 +222,7 @@ var Socials = function (_React$Component4) {
               'a',
               {
                 target: '_blank ',
-                href: 'mailto:downbeat@jacksonsdean.com ',
+                href: 'mailto:connect@downbeat.games',
                 className: 'icon fa-envelope '
               },
               React.createElement(
@@ -278,8 +240,8 @@ var Socials = function (_React$Component4) {
   return Socials;
 }(React.Component);
 
-var Footer = function (_React$Component5) {
-  _inherits(Footer, _React$Component5);
+var Footer = function (_React$Component4) {
+  _inherits(Footer, _React$Component4);
 
   function Footer() {
     _classCallCheck(this, Footer);
@@ -321,31 +283,4 @@ var Footer = function (_React$Component5) {
   return Footer;
 }(React.Component);
 
-var App = function (_React$Component6) {
-  _inherits(App, _React$Component6);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-  }
-
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'div',
-        null,
-        React.createElement(Header, null),
-        React.createElement(NavigationMenu, null),
-        React.createElement(HomePageBanner, null),
-        React.createElement(HomePageFeatures, null),
-        React.createElement(Footer, null)
-      );
-    }
-  }]);
-
-  return App;
-}(React.Component);
-
-ReactDOM.render(React.createElement(App, null), domContainer);
+export { NavigationMenu, Header, Footer, Socials };
