@@ -42,7 +42,7 @@ export default [{
         <br/>Try not to fall!'
 }, {
     id: 'parkour-run',
-    title: 'Parkour Run',
+    title: 'Parkour Run 3D',
     subtitle: 'Precise Action',
     bannerImg: '',
     url: '/parkour-run',
