@@ -57,7 +57,16 @@ var NavigationMenu = function (_React$Component) {
                   game.title
                 )
               );
-            })
+            }),
+            React.createElement(
+              'li',
+              null,
+              React.createElement(
+                'a',
+                { target: '_blank', href: 'https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f' },
+                'Contact Us'
+              )
+            )
           )
         )
       );
@@ -222,7 +231,7 @@ var Socials = function (_React$Component3) {
               'a',
               {
                 target: '_blank ',
-                href: 'mailto:connect@downbeat.games',
+                href: 'https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f',
                 className: 'icon fa-envelope '
               },
               React.createElement(
