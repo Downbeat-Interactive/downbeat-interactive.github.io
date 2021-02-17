@@ -1,5 +1,7 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
+import {PrivacyLink, GamePageLink} from './common_components.js';
+
 class FeatureStoreButton extends React.Component{
     constructor(props){
       super(props);
@@ -62,13 +64,13 @@ class FeatureStoreButton extends React.Component{
                         <div className="align-center feature-content" data-aos="fade-up"  >
                           <div dangerouslySetInnerHTML={{__html: this.props.description, sanitize: true}} />
                           <br/>
-                          <a href={this.props.url}><p>More info <i className="fas fa-arrow-right"/></p></a>
+                         <GamePageLink url={this.props.url}/>
                         </div>
                           
                         <footer className="align-center" data-aos="zoom-in">
                            <FeatureStoreButton url={this.props.storeUrl}/>
                         </footer>
-                        <a href={this.props.url+"/privacy-policy/"}><p>Privacy Policy</p></a>
+                        <PrivacyLink url={this.props.url}/>
                     </div>
                 </div>
                 </div>

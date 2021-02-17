@@ -1,6 +1,7 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
 import data from './game_data.js'
+import GameFeatureFull from './game_features.js';
 
 class NavigationMenu extends React.Component{
     constructor(props){
@@ -113,6 +114,40 @@ class NavigationMenu extends React.Component{
     }
   
   }
+
+  class PrivacyLink extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
+    render(){
+      if(typeof this.props.url !== 'undefined' && this.props.url.length>0){
+          return (<ErrorBoundary showBack={false}>
+            <a href={this.props.url+"/privacy-policy/"}><p>Privacy Policy</p></a>
+          </ErrorBoundary>
+        );
+    }
+    else
+        return <div/>
+    }
+  }
+
+  class GamePageLink extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
+    render(){
+      if(typeof this.props.url !== 'undefined' && this.props.url.length>0){
+          return (<ErrorBoundary showBack={false}>
+           <a href={this.props.url}><p>More info <i className="fas fa-arrow-right"/></p></a>
+          </ErrorBoundary>
+        );
+    }
+    else
+        return <div/>
+    }
+  }
   
   class Footer extends React.Component{
     render(){
@@ -137,9 +172,39 @@ class NavigationMenu extends React.Component{
     }
   
   }
+ 
+  class Content extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
+    render(){
+      return <div>
+      <ErrorBoundary>
+      <section className="wrapper style2">
+            <div className="inner" >
+                <div id={this.props.id} data-aos="fade-right" data-aos-delay="100" className="box align-center" >
+                    <div className="content">
+                        <div className="align-center feature-content" data-aos="fade-up"  >
+                          <div  className="align-center feature-content" dangerouslySetInnerHTML={{__html: this.props.html, sanitize: true}} />
+                          <br/>
+                        </div>
+                    </div>
+                </div>
+                </div>
+          </section>
+     
 
+
+        </ErrorBoundary>
+      </div>
+    }
+  }
   export {
         NavigationMenu, 
         Header,
         Footer,
+        PrivacyLink,
+        GamePageLink,
+        Content,
         Socials}

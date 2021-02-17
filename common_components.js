@@ -10,6 +10,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import ErrorBoundary from './error_boundary.js';
 import data from './game_data.js';
+import GameFeatureFull from './game_features.js';
 
 var NavigationMenu = function (_React$Component) {
   _inherits(NavigationMenu, _React$Component);
@@ -249,8 +250,81 @@ var Socials = function (_React$Component3) {
   return Socials;
 }(React.Component);
 
-var Footer = function (_React$Component4) {
-  _inherits(Footer, _React$Component4);
+var PrivacyLink = function (_React$Component4) {
+  _inherits(PrivacyLink, _React$Component4);
+
+  function PrivacyLink(props) {
+    _classCallCheck(this, PrivacyLink);
+
+    var _this4 = _possibleConstructorReturn(this, (PrivacyLink.__proto__ || Object.getPrototypeOf(PrivacyLink)).call(this, props));
+
+    _this4.props = props;
+    return _this4;
+  }
+
+  _createClass(PrivacyLink, [{
+    key: 'render',
+    value: function render() {
+      if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) {
+        return React.createElement(
+          ErrorBoundary,
+          { showBack: false },
+          React.createElement(
+            'a',
+            { href: this.props.url + "/privacy/" },
+            React.createElement(
+              'p',
+              null,
+              'Privacy Policy'
+            )
+          )
+        );
+      } else return React.createElement('div', null);
+    }
+  }]);
+
+  return PrivacyLink;
+}(React.Component);
+
+var GamePageLink = function (_React$Component5) {
+  _inherits(GamePageLink, _React$Component5);
+
+  function GamePageLink(props) {
+    _classCallCheck(this, GamePageLink);
+
+    var _this5 = _possibleConstructorReturn(this, (GamePageLink.__proto__ || Object.getPrototypeOf(GamePageLink)).call(this, props));
+
+    _this5.props = props;
+    return _this5;
+  }
+
+  _createClass(GamePageLink, [{
+    key: 'render',
+    value: function render() {
+      if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) {
+        return React.createElement(
+          ErrorBoundary,
+          { showBack: false },
+          React.createElement(
+            'a',
+            { href: this.props.url },
+            React.createElement(
+              'p',
+              null,
+              'More info ',
+              React.createElement('i', { className: 'fas fa-arrow-right' })
+            )
+          )
+        );
+      } else return React.createElement('div', null);
+    }
+  }]);
+
+  return GamePageLink;
+}(React.Component);
+
+var Footer = function (_React$Component6) {
+  _inherits(Footer, _React$Component6);
 
   function Footer() {
     _classCallCheck(this, Footer);
@@ -292,4 +366,55 @@ var Footer = function (_React$Component4) {
   return Footer;
 }(React.Component);
 
-export { NavigationMenu, Header, Footer, Socials };
+var Content = function (_React$Component7) {
+  _inherits(Content, _React$Component7);
+
+  function Content(props) {
+    _classCallCheck(this, Content);
+
+    var _this7 = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
+
+    _this7.props = props;
+    return _this7;
+  }
+
+  _createClass(Content, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          ErrorBoundary,
+          null,
+          React.createElement(
+            'section',
+            { className: 'wrapper style2' },
+            React.createElement(
+              'div',
+              { className: 'inner' },
+              React.createElement(
+                'div',
+                { id: this.props.id, 'data-aos': 'fade-right', 'data-aos-delay': '100', className: 'box align-center' },
+                React.createElement(
+                  'div',
+                  { className: 'content' },
+                  React.createElement(
+                    'div',
+                    { className: 'align-center feature-content', 'data-aos': 'fade-up' },
+                    React.createElement('div', { className: 'align-center feature-content', dangerouslySetInnerHTML: { __html: this.props.html, sanitize: true } }),
+                    React.createElement('br', null)
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Content;
+}(React.Component);
+
+export { NavigationMenu, Header, Footer, PrivacyLink, GamePageLink, Content, Socials };

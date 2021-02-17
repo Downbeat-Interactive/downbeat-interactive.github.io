@@ -2,7 +2,7 @@
 import ErrorBoundary from './error_boundary.js';
 import GameFeatureFull from './game_features.js';
 import data from './game_data.js'
-import {Header, Footer, NavigationMenu} from './common_components.js'
+import {Header, Footer, NavigationMenu, Content} from './common_components.js'
 
 let domContainer = document.querySelector('#app_container');
 
@@ -13,7 +13,7 @@ function getData(id){
             return data[i];
         }
     }
-
+    return data[0];
 }
 
 
@@ -24,35 +24,45 @@ class GamePage extends React.Component{
         this.props = props;
         this.id = domContainer.getAttribute("game");
         this.props.data = getData(this.id);
+        this.props.html = domContainer.getAttribute("html-data");
     }
     render(){
         var game = this.props.data;
         console.log(game);
-        document.title = game.title + " | Downbeat Games";
-      return (
-        <div>
+        if(game.title.length>0){
+            document.title = game.title + " | Downbeat Games";
+            
+          return (
+            <div>
+                <Header/>
+                <NavigationMenu/>
+                <section className="wrapper style3 align-center">
+                <div className="game-page-feature-container">
+                <GameFeatureFull  
+                    key={game.id} 
+                    id={game.id} 
+                    title={game.title} 
+                    url={game.url} 
+                    description={game.description} 
+                    videoUrl={game.videoUrl}
+                    storeUrl={game.storeUrl}
+                    subtitle={game.subtitle}
+                    videoDimensions={game.videoDimensions}
+                /></div></section>
+                <Footer/>
+            </div>
+          );
+        }
+        else return( <div>
             <Header/>
             <NavigationMenu/>
-            <section className="wrapper style3 align-center">
-            <div className="game-page-feature-container">
-            <GameFeatureFull  
-                key={game.id} 
-                id={game.id} 
-                title={game.title} 
-                url={game.url} 
-                description={game.description} 
-                videoUrl={game.videoUrl}
-                storeUrl={game.storeUrl}
-                subtitle={game.subtitle}
-                videoDimensions={game.videoDimensions}
-            /></div></section>
+            <Content html={this.props.html}/>
             <Footer/>
-        </div>
-      );
+        </div>);
     }
   
 }
 
   
 
-ReactDOM.render(<GamePage/>, domContainer);
+ReactDOM.render(<GamePage />, domContainer);

@@ -9,6 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 import ErrorBoundary from './error_boundary.js';
+import { PrivacyLink, GamePageLink } from './common_components.js';
 
 var FeatureStoreButton = function (_React$Component) {
   _inherits(FeatureStoreButton, _React$Component);
@@ -129,31 +130,14 @@ var GameFeatureFull = function (_React$Component3) {
                   { className: 'align-center feature-content', 'data-aos': 'fade-up' },
                   React.createElement('div', { dangerouslySetInnerHTML: { __html: this.props.description, sanitize: true } }),
                   React.createElement('br', null),
-                  React.createElement(
-                    'a',
-                    { href: this.props.url },
-                    React.createElement(
-                      'p',
-                      null,
-                      'More info ',
-                      React.createElement('i', { className: 'fas fa-arrow-right' })
-                    )
-                  )
+                  React.createElement(GamePageLink, { url: this.props.url })
                 ),
                 React.createElement(
                   'footer',
                   { className: 'align-center', 'data-aos': 'zoom-in' },
                   React.createElement(FeatureStoreButton, { url: this.props.storeUrl })
                 ),
-                React.createElement(
-                  'a',
-                  { href: this.props.url + "/privacy-policy/" },
-                  React.createElement(
-                    'p',
-                    null,
-                    'Privacy Policy'
-                  )
-                )
+                React.createElement(PrivacyLink, { url: this.props.url })
               )
             )
           )

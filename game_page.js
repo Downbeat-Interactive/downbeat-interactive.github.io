@@ -11,7 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import ErrorBoundary from './error_boundary.js';
 import GameFeatureFull from './game_features.js';
 import data from './game_data.js';
-import { Header, Footer, NavigationMenu } from './common_components.js';
+import { Header, Footer, NavigationMenu, Content } from './common_components.js';
 
 var domContainer = document.querySelector('#app_container');
 
@@ -22,6 +22,7 @@ function getData(id) {
             return data[i];
         }
     }
+    return data[0];
 }
 
 var GamePage = function (_React$Component) {
@@ -35,6 +36,7 @@ var GamePage = function (_React$Component) {
         _this.props = props;
         _this.id = domContainer.getAttribute("game");
         _this.props.data = getData(_this.id);
+        _this.props.html = domContainer.getAttribute("html-data");
         return _this;
     }
 
@@ -43,31 +45,41 @@ var GamePage = function (_React$Component) {
         value: function render() {
             var game = this.props.data;
             console.log(game);
-            document.title = game.title + " | Downbeat Games";
-            return React.createElement(
+            if (game.title.length > 0) {
+                document.title = game.title + " | Downbeat Games";
+
+                return React.createElement(
+                    'div',
+                    null,
+                    React.createElement(Header, null),
+                    React.createElement(NavigationMenu, null),
+                    React.createElement(
+                        'section',
+                        { className: 'wrapper style3 align-center' },
+                        React.createElement(
+                            'div',
+                            { className: 'game-page-feature-container' },
+                            React.createElement(GameFeatureFull, {
+                                key: game.id,
+                                id: game.id,
+                                title: game.title,
+                                url: game.url,
+                                description: game.description,
+                                videoUrl: game.videoUrl,
+                                storeUrl: game.storeUrl,
+                                subtitle: game.subtitle,
+                                videoDimensions: game.videoDimensions
+                            })
+                        )
+                    ),
+                    React.createElement(Footer, null)
+                );
+            } else return React.createElement(
                 'div',
                 null,
                 React.createElement(Header, null),
                 React.createElement(NavigationMenu, null),
-                React.createElement(
-                    'section',
-                    { className: 'wrapper style3 align-center' },
-                    React.createElement(
-                        'div',
-                        { className: 'game-page-feature-container' },
-                        React.createElement(GameFeatureFull, {
-                            key: game.id,
-                            id: game.id,
-                            title: game.title,
-                            url: game.url,
-                            description: game.description,
-                            videoUrl: game.videoUrl,
-                            storeUrl: game.storeUrl,
-                            subtitle: game.subtitle,
-                            videoDimensions: game.videoDimensions
-                        })
-                    )
-                ),
+                React.createElement(Content, { html: this.props.html }),
                 React.createElement(Footer, null)
             );
         }

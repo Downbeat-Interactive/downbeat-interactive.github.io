@@ -1,4 +1,14 @@
 export default [{
+    id: 'default',
+    title: '',
+    subtitle: '',
+    bannerImg: '',
+    url: undefined,
+    videoUrl: '',
+    storeUrl: '',
+    videoDimensions: [undefined, undefined],
+    description: ''
+}, {
     id: 'dandy-drift',
     title: 'Dandy Drift',
     subtitle: 'Relaxing Runner',
@@ -52,4 +62,15 @@ export default [{
     description: 'Swipe obstacles out of the way as you sprint along the rooftops!\
             <br/>Can you make it to the goal?\
         '
+}, {
+    id: 'tactics-rush',
+    title: 'Tactics Rush',
+    subtitle: 'Strategic Puzzler',
+    bannerImg: '',
+    url: '/tactics-rush',
+    videoUrl: '',
+    videoDimensions: [undefined, undefined],
+    storeUrl: 'https://play.google.com/store/apps/details?id=com.downbeat.tacticsrush',
+    description: 'Gather your troops and try to capture the enemy bunker.<br/><br/>\
+        Can you get the high score?'
 }];
