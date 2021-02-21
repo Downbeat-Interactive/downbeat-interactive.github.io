@@ -271,7 +271,7 @@ var PrivacyLink = function (_React$Component4) {
           { showBack: false },
           React.createElement(
             'a',
-            { href: this.props.url + "/privacy/" },
+            { href: this.props.url + "/privacy-policy/" },
             React.createElement(
               'p',
               null,

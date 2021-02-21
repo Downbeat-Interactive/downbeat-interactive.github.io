@@ -1,5 +1,5 @@
 'use strict';
-import GameFeatureFull from './game_features.js';
+import {GameFeatureFull, GameFeatureScreenshots} from './game_features.js';
 import ErrorBoundary from './error_boundary.js';
 import data from './game_data.js'
 import {Header, Footer, NavigationMenu} from './common_components.js'

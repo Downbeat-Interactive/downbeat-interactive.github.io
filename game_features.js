@@ -10,6 +10,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import ErrorBoundary from './error_boundary.js';
 import { PrivacyLink, GamePageLink } from './common_components.js';
+import * as gplay from '../node_modules/google-play-scraper/index.js';
 
 var FeatureStoreButton = function (_React$Component) {
   _inherits(FeatureStoreButton, _React$Component);
@@ -26,9 +27,9 @@ var FeatureStoreButton = function (_React$Component) {
   _createClass(FeatureStoreButton, [{
     key: 'render',
     value: function render() {
-      if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) return React.createElement(
+      if (typeof this.props.bundle !== 'undefined' && this.props.bundle.length > 0) return React.createElement(
         'a',
-        { target: '_blank', href: this.props.url },
+        { target: '_blank', href: "https://play.google.com/store/apps/details?id=" + this.props.bundle },
         React.createElement('img', { className: 'image-button', src: '/images/google-play-download.png', alt: 'See on Google Play' })
       );else return React.createElement('div', null);
     }
@@ -135,7 +136,7 @@ var GameFeatureFull = function (_React$Component3) {
                 React.createElement(
                   'footer',
                   { className: 'align-center', 'data-aos': 'zoom-in' },
-                  React.createElement(FeatureStoreButton, { url: this.props.storeUrl })
+                  React.createElement(FeatureStoreButton, { bundle: this.props.bundle })
                 ),
                 React.createElement(PrivacyLink, { url: this.props.url })
               )
@@ -149,4 +150,28 @@ var GameFeatureFull = function (_React$Component3) {
   return GameFeatureFull;
 }(React.Component);
 
+var GameFeatureScreenshots = function (_React$Component4) {
+  _inherits(GameFeatureScreenshots, _React$Component4);
+
+  function GameFeatureScreenshots(props) {
+    _classCallCheck(this, GameFeatureScreenshots);
+
+    var _this4 = _possibleConstructorReturn(this, (GameFeatureScreenshots.__proto__ || Object.getPrototypeOf(GameFeatureScreenshots)).call(this, props));
+
+    _this4.props = props;
+    return _this4;
+  }
+
+  _createClass(GameFeatureScreenshots, [{
+    key: 'render',
+    value: function render() {
+
+      gplay.app({ appId: 'com.google.android.apps.translate' }).then(console.log, console.log);
+    }
+  }]);
+
+  return GameFeatureScreenshots;
+}(React.Component);
+
 export default GameFeatureFull;
+export { GameFeatureFull, GameFeatureScreenshots };

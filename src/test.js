@@ -1,6 +1,6 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
-import {GameFeatureFull} from './game_features.js';
+import {GameFeatureFull, GameFeatureScreenshots} from './game_features.js';
 import data from './game_data.js'
 import {Header, Footer, NavigationMenu, Content} from './common_components.js'
 
@@ -45,10 +45,12 @@ class GamePage extends React.Component{
                     url={game.url} 
                     description={game.description} 
                     videoUrl={game.videoUrl}
-                    bundle={game.bundle}
+                    storeUrl={game.storeUrl}
                     subtitle={game.subtitle}
                     videoDimensions={game.videoDimensions}
-                /></div></section>
+                /></div>
+                <GameFeatureScreenshots bundle={game.bundle}/>
+                </section>
                 <Footer/>
             </div>
           );

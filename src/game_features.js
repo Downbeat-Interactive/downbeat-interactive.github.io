@@ -1,6 +1,8 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
 import {PrivacyLink, GamePageLink} from './common_components.js';
+import * as gplay from '../node_modules/google-play-scraper/index.js'
+
 
 class FeatureStoreButton extends React.Component{
     constructor(props){
@@ -9,8 +11,8 @@ class FeatureStoreButton extends React.Component{
     }
   
     render(){
-      if(typeof this.props.url !== 'undefined' && this.props.url.length>0)
-        return <a target="_blank" href={this.props.url}><img className="image-button" src="/images/google-play-download.png" alt="See on Google Play"/></a>
+      if(typeof this.props.bundle !== 'undefined' && this.props.bundle.length>0)
+        return <a target="_blank" href={"https://play.google.com/store/apps/details?id="+this.props.bundle}><img className="image-button" src="/images/google-play-download.png" alt="See on Google Play"/></a>
       else
         return <div/>
     }
@@ -41,6 +43,7 @@ class FeatureStoreButton extends React.Component{
         return <div/>
     }
   }
+
   
   class GameFeatureFull extends React.Component {
     
@@ -68,7 +71,7 @@ class FeatureStoreButton extends React.Component{
                         </div>
                           
                         <footer className="align-center" data-aos="zoom-in">
-                           <FeatureStoreButton url={this.props.storeUrl}/>
+                           <FeatureStoreButton bundle={this.props.bundle}/>
                         </footer>
                         <PrivacyLink url={this.props.url}/>
                     </div>
@@ -79,5 +82,24 @@ class FeatureStoreButton extends React.Component{
     }
   }
 
-  export default GameFeatureFull;
+
+
+  class GameFeatureScreenshots extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
   
+    render(){
+      
+ 
+gplay.app({appId: 'com.google.android.apps.translate'})
+  .then(console.log, console.log);
+    }
+
+  }
+export default GameFeatureFull;
+export {
+  GameFeatureFull,
+  GameFeatureScreenshots
+}
