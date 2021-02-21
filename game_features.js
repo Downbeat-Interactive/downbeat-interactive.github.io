@@ -10,6 +10,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import ErrorBoundary from './error_boundary.js';
 import { PrivacyLink, GamePageLink } from './common_components.js';
+import { GooglePlayScraper } from './utils.js';
 
 var FeatureStoreButton = function (_React$Component) {
   _inherits(FeatureStoreButton, _React$Component);
@@ -165,7 +166,15 @@ var GameFeatureScreenshots = function (_React$Component4) {
     key: 'render',
     value: function render() {
 
-      gplay.app({ appId: 'com.google.android.apps.translate' }).then(console.log, console.log);
+      var gplay = new GooglePlayScraper();
+
+      gplay.scrape("com.downbeat.tacticsrush");
+
+      return React.createElement(
+        'div',
+        null,
+        'Test'
+      );
     }
   }]);
 

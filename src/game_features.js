@@ -1,6 +1,7 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
 import {PrivacyLink, GamePageLink} from './common_components.js';
+import {GooglePlayScraper} from './utils.js'
 
 class FeatureStoreButton extends React.Component{
     constructor(props){
@@ -89,11 +90,16 @@ class FeatureStoreButton extends React.Component{
     }
   
     render(){
+
+      const gplay = new GooglePlayScraper();
+
+      gplay.scrape("com.downbeat.tacticsrush");
       
- 
-// gplay.app({appId: 'com.google.android.apps.translate'})
-//   .then(console.log, console.log);
-//     }
+      
+
+
+      return <div>Test</div>
+    }
 
   }
 export default GameFeatureFull;

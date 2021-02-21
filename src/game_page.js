@@ -28,7 +28,6 @@ class GamePage extends React.Component{
     }
     render(){
         var game = this.props.data;
-        console.log(game);
         if(game.title.length>0){
             document.title = game.title + " | Downbeat Games";
             

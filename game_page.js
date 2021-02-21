@@ -44,7 +44,6 @@ var GamePage = function (_React$Component) {
         key: 'render',
         value: function render() {
             var game = this.props.data;
-            console.log(game);
             if (game.title.length > 0) {
                 document.title = game.title + " | Downbeat Games";
 

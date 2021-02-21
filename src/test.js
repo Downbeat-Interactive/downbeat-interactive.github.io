@@ -6,7 +6,7 @@ import {Header, Footer, NavigationMenu, Content} from './common_components.js'
 
 let domContainer = document.querySelector('#app_container');
 
-function getData(id){
+function gameData(id){
     for (let i = 0; i < data.length; i++) {
         const game = data[i];
         if(game.id == id){
@@ -16,24 +16,21 @@ function getData(id){
     return data[0];
 }
 
-
-
-class GamePage extends React.Component{
+class TestPage extends React.Component{
     constructor(props){
         super(props);
         this.props = props;
         this.id = domContainer.getAttribute("game");
-        this.props.data = getData(this.id);
-        this.props.html = domContainer.getAttribute("html-data");
+        this.gameData = gameData(this.id);
     }
     render(){
-        var game = this.props.data;
-        console.log(game);
+        var game = this.gameData;
         if(game.title.length>0){
             document.title = game.title + " | Downbeat Games";
             
           return (
             <div>
+            <ErrorBoundary>
                 <Header/>
                 <NavigationMenu/>
                 <section className="wrapper style3 align-center">
@@ -45,26 +42,29 @@ class GamePage extends React.Component{
                     url={game.url} 
                     description={game.description} 
                     videoUrl={game.videoUrl}
-                    storeUrl={game.storeUrl}
+                    bundle={game.bundle}
                     subtitle={game.subtitle}
                     videoDimensions={game.videoDimensions}
                 /></div>
-                <GameFeatureScreenshots bundle={game.bundle}/>
+                <ErrorBoundary>
+                    <GameFeatureScreenshots bundle={game.bundle}/>
+                </ErrorBoundary>
                 </section>
                 <Footer/>
+            </ErrorBoundary>
             </div>
           );
         }
         else return( <div>
             <Header/>
             <NavigationMenu/>
-            <Content html={this.props.html}/>
+            <GameFeatureScreenshots/>
             <Footer/>
         </div>);
     }
   
 }
 
-  
+ 
 
-ReactDOM.render(<GamePage />, domContainer);
+ReactDOM.render(<ErrorBoundary><TestPage /></ErrorBoundary>, domContainer);
