@@ -59,7 +59,7 @@ var FeatureVideo = function (_React$Component2) {
           { showBack: false },
           React.createElement(
             'div',
-            { id: this.props.id + "-video", className: 'iframe-container align-center' },
+            { id: this.props.id + "-video", className: 'iframe-container align-center feature-video' },
             React.createElement('iframe', { className: 'feature-iframe',
               width: this.props.width,
               height: this.props.height,
@@ -77,33 +77,62 @@ var FeatureVideo = function (_React$Component2) {
   return FeatureVideo;
 }(React.Component);
 
-var GameFeatureFull = function (_React$Component3) {
-  _inherits(GameFeatureFull, _React$Component3);
+var BoxFull = function (_React$Component3) {
+  _inherits(BoxFull, _React$Component3);
 
-  function GameFeatureFull(props) {
-    _classCallCheck(this, GameFeatureFull);
+  function BoxFull(props) {
+    _classCallCheck(this, BoxFull);
 
-    var _this3 = _possibleConstructorReturn(this, (GameFeatureFull.__proto__ || Object.getPrototypeOf(GameFeatureFull)).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, (BoxFull.__proto__ || Object.getPrototypeOf(BoxFull)).call(this, props));
 
     _this3.props = props;
     return _this3;
   }
 
-  _createClass(GameFeatureFull, [{
+  _createClass(BoxFull, [{
     key: 'render',
     value: function render() {
       return React.createElement(
-        ErrorBoundary,
-        null,
+        'section',
+        { className: 'wrapper style2' },
         React.createElement(
-          'section',
-          { className: 'wrapper style2' },
+          'div',
+          { className: 'inner' },
           React.createElement(
             'div',
-            { className: 'inner' },
-            React.createElement(
+            { id: this.props.id, 'data-aos': 'fade-right', 'data-aos-delay': '100', className: 'box align-center' },
+            this.props.inner
+          )
+        )
+      );
+    }
+  }]);
+
+  return BoxFull;
+}(React.Component);
+
+var GameFeatureFull = function (_React$Component4) {
+  _inherits(GameFeatureFull, _React$Component4);
+
+  function GameFeatureFull(props) {
+    _classCallCheck(this, GameFeatureFull);
+
+    var _this4 = _possibleConstructorReturn(this, (GameFeatureFull.__proto__ || Object.getPrototypeOf(GameFeatureFull)).call(this, props));
+
+    _this4.props = props;
+    return _this4;
+  }
+
+  _createClass(GameFeatureFull, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.id != 'default') {
+        return React.createElement(
+          ErrorBoundary,
+          null,
+          React.createElement(BoxFull, { id: this.props.id, inner: React.createElement(
               'div',
-              { id: this.props.id, 'data-aos': 'fade-right', 'data-aos-delay': '100', className: 'box align-center' },
+              null,
               React.createElement(FeatureVideo, { url: this.props.videoUrl, id: this.props.id }),
               React.createElement(
                 'div',
@@ -140,41 +169,72 @@ var GameFeatureFull = function (_React$Component3) {
                 ),
                 React.createElement(PrivacyLink, { url: this.props.url })
               )
-            )
-          )
-        )
-      );
+            ) })
+        );
+      } else {
+        return null;
+      }
     }
   }]);
 
   return GameFeatureFull;
 }(React.Component);
 
-var GameFeatureScreenshots = function (_React$Component4) {
-  _inherits(GameFeatureScreenshots, _React$Component4);
+var GameFeatureScreenshots = function (_React$Component5) {
+  _inherits(GameFeatureScreenshots, _React$Component5);
 
   function GameFeatureScreenshots(props) {
     _classCallCheck(this, GameFeatureScreenshots);
 
-    var _this4 = _possibleConstructorReturn(this, (GameFeatureScreenshots.__proto__ || Object.getPrototypeOf(GameFeatureScreenshots)).call(this, props));
+    var _this5 = _possibleConstructorReturn(this, (GameFeatureScreenshots.__proto__ || Object.getPrototypeOf(GameFeatureScreenshots)).call(this, props));
 
-    _this4.props = props;
-    return _this4;
+    _this5.props = props;
+    _this5.data = props.data;
+    return _this5;
   }
 
   _createClass(GameFeatureScreenshots, [{
     key: 'render',
     value: function render() {
+      if (this.data.nScreens > 0) {
+        var output = [];
 
-      var gplay = new GooglePlayScraper();
+        output.push();
+        for (var i = 0; i < this.data.nScreens; i++) {
+          output.push(React.createElement('img', { className: 'game-screenshot', src: this.props.data.url + "/screens/" + i.toString() + ".png" }));
+        }
 
-      gplay.scrape("com.downbeat.tacticsrush");
+        return React.createElement(BoxFull, { id: this.props.data.id, inner: React.createElement(
+            'div',
+            { className: 'content' },
+            React.createElement(
+              'header',
+              { className: 'align-center', 'data-aos': 'slide-left', 'data-aos-duration': '400' },
+              React.createElement(
+                'p',
+                null,
+                this.props.data.title
+              ),
+              React.createElement(
+                'a',
+                { className: 'no-decoration', href: this.props.data.url },
+                React.createElement(
+                  'h2',
+                  { className: 'feature-title' },
+                  'Screenshots'
+                )
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'align-center feature-content' },
+              React.createElement('br', null)
+            ),
+            output
+          )
 
-      return React.createElement(
-        'div',
-        null,
-        'Test'
-      );
+        });
+      } else return null;
     }
   }]);
 

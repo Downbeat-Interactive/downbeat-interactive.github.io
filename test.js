@@ -75,7 +75,7 @@ var TestPage = function (_React$Component) {
                             React.createElement(
                                 ErrorBoundary,
                                 null,
-                                React.createElement(GameFeatureScreenshots, { bundle: game.bundle })
+                                React.createElement(GameFeatureScreenshots, { data: game })
                             )
                         ),
                         React.createElement(Footer, null)
@@ -86,7 +86,7 @@ var TestPage = function (_React$Component) {
                 null,
                 React.createElement(Header, null),
                 React.createElement(NavigationMenu, null),
-                React.createElement(GameFeatureScreenshots, null),
+                React.createElement(GameFeatureScreenshots, { data: game }),
                 React.createElement(Footer, null)
             );
         }

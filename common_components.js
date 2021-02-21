@@ -54,7 +54,7 @@ var NavigationMenu = function (_React$Component) {
                 },
                 React.createElement(
                   'a',
-                  { href: "/#" + game.id },
+                  { href: game.url },
                   game.title
                 )
               );

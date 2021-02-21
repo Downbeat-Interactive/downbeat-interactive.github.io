@@ -25,7 +25,7 @@ class FeatureStoreButton extends React.Component{
     render(){
       if(typeof this.props.url !== 'undefined' && this.props.url.length>0){
           return (<ErrorBoundary showBack={false}>
-          <div id={this.props.id + "-video"} className="iframe-container align-center">
+          <div id={this.props.id + "-video"} className="iframe-container align-center feature-video">
             <iframe className="feature-iframe"
               width   = {this.props.width}
               height  = {this.props.height}
@@ -44,6 +44,21 @@ class FeatureStoreButton extends React.Component{
   }
 
   
+  class BoxFull extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
+    render(){
+      return  <section className="wrapper style2">
+      <div className="inner" >
+          <div id={this.props.id} data-aos="fade-right" data-aos-delay="100" className="box align-center" >
+          {this.props.inner}
+          </div></div></section>
+    }
+
+  }
+
   class GameFeatureFull extends React.Component {
     
     constructor(props){
@@ -52,12 +67,10 @@ class FeatureStoreButton extends React.Component{
     }
   
     render() {
+      if(this.props.id!='default'){
       return <ErrorBoundary>
-      <section className="wrapper style2">
-            <div className="inner" >
-                <div id={this.props.id} data-aos="fade-right" data-aos-delay="100" className="box align-center" >
+     <BoxFull id={this.props.id} inner={<div>
                    <FeatureVideo url={this.props.videoUrl} id={this.props.id} />
-                    
                     <div className="content">
                         <header className="align-center" data-aos="slide-left" data-aos-duration="400">
                             <p>{this.props.subtitle}</p>
@@ -74,10 +87,11 @@ class FeatureStoreButton extends React.Component{
                         </footer>
                         <PrivacyLink url={this.props.url}/>
                     </div>
-                </div>
-                </div>
-          </section>
-          </ErrorBoundary> 
+                    </div>}/>
+          </ErrorBoundary> }
+          else{
+            return null;
+          }
     }
   }
 
@@ -87,18 +101,36 @@ class FeatureStoreButton extends React.Component{
     constructor(props){
       super(props);
       this.props = props;
+      this.data=props.data;
     }
   
     render(){
+        if(this.data.nScreens>0){
+          var output = [];
 
-      const gplay = new GooglePlayScraper();
+          output.push( );
+          for(var i=0; i<this.data.nScreens; i++){
+              output.push(<img className="game-screenshot"  src={this.props.data.url + "/screens/"+i.toString() + ".png"}/>);
+          }     
 
-      gplay.scrape("com.downbeat.tacticsrush");
-      
-      
+         return <BoxFull id={this.props.data.id} inner={
+           <div className="content">
+            <header className="align-center" data-aos="slide-left" data-aos-duration="400">
+                            <p>{this.props.data.title}</p>
+                            <a className = "no-decoration" href={this.props.data.url}><h2 className="feature-title">Screenshots</h2></a>
+                        </header>
+                        <div className="align-center feature-content"  >
+                          <br/>
+                        </div>
+                 {output}
+           </div>
+           }
 
-
-      return <div>Test</div>
+           />
+        }
+        else
+        return null;
+     
     }
 
   }

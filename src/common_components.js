@@ -23,7 +23,7 @@ class NavigationMenu extends React.Component{
                 <li  
                 key={game.id} 
                 title={game.title} 
-                ><a href ={"/#"+game.id}>{game.title}</a></li>
+                ><a href ={game.url}>{game.title}</a></li>
                 ))}
                 <li><a target = "_blank" href="https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f">Contact Us</a></li>
           </ul>

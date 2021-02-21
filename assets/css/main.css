@@ -74,10 +74,23 @@
    
 }
 
+.game-screenshot{
+    width:25vw;
+    padding: 5vh;
+    height: auto;
+}
+.game-screenshot:hover {
+    transform: scale(1.4);
+    z-index: 1;
+  }
+
 .content {
     font-size: 2vh;
 }
 
+.feature-video{
+    overflow: hidden"
+}
 
 .no-bullets{
     list-style: none outside;
@@ -215,6 +228,11 @@ nav,
 section {
     display: block;
 }
+
+html {
+    overflow-x: hidden;
+}
+
 
 body {
     line-height: 1;

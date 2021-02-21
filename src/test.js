@@ -47,7 +47,7 @@ class TestPage extends React.Component{
                     videoDimensions={game.videoDimensions}
                 /></div>
                 <ErrorBoundary>
-                    <GameFeatureScreenshots bundle={game.bundle}/>
+                    <GameFeatureScreenshots data={game}/>
                 </ErrorBoundary>
                 </section>
                 <Footer/>
@@ -58,7 +58,7 @@ class TestPage extends React.Component{
         else return( <div>
             <Header/>
             <NavigationMenu/>
-            <GameFeatureScreenshots/>
+            <GameFeatureScreenshots data={game}/>
             <Footer/>
         </div>);
     }

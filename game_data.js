@@ -4,6 +4,7 @@ export default [{
     subtitle: '',
     bannerImg: '',
     url: undefined,
+    nScreens: 0,
     videoUrl: '',
     storeUrl: '',
     bundle: '',
@@ -15,6 +16,7 @@ export default [{
     subtitle: 'Relaxing Runner',
     bannerImg: '',
     url: '/dandy-drift',
+    nScreens: 0,
     videoUrl: 'https://www.youtube.com/embed/ALo7LZK3vUU',
     videoDimensions: [undefined, undefined],
     bundle: 'com.Jackson.DandyDrift',
@@ -34,6 +36,7 @@ export default [{
     subtitle: 'Frantic Dash',
     bannerImg: '',
     url: '/road-trip-rush',
+    nScreens: 5,
     videoUrl: 'https://www.youtube.com/embed/eqQxFkQ41Bo',
     bundle: 'com.Jackson.DebrisDash',
     videoDimensions: [560, 315],
@@ -41,27 +44,17 @@ export default [{
             <br/><br/>In Road Trip Rush, you don\'t control the car. Instead, you have to move physically-simulated debris out of the road by dragging and flicking.\
         '
 }, {
-    id: 'balance-run',
-    title: 'Balance Run',
-    subtitle: 'Intense focus',
-    bannerImg: '',
-    url: '/balance-run',
-    videoUrl: 'https://youtube.com/embed/QE5_AcfeJ7E',
-    videoDimensions: [undefined, undefined],
-    bundle: 'com.downbeat.polebalance',
-    description: 'Keep yourself balanced by moving blocks left or right as you run high above the ground. \
-        <br/>Try not to fall!'
-}, {
     id: 'parkour-run',
-    title: 'Parkour Run 3D',
+    title: 'Parkour Run',
     subtitle: 'Precise Action',
     bannerImg: '',
     url: '/parkour-run',
+    nScreens: 4,
     videoUrl: 'https://youtube.com/embed/gjkYDLshdtU',
     videoDimensions: [undefined, undefined],
     bundle: 'com.downbeat.swiperun',
     description: 'Swipe obstacles out of the way as you sprint along the rooftops!\
-            <br/>Can you make it to the goal?\
+        <br/>Can you make it to the goal?\
         '
 }, {
     id: 'tactics-rush',
@@ -69,10 +62,23 @@ export default [{
     subtitle: 'Strategic Puzzler',
     bannerImg: '',
     url: '/tactics-rush',
-    videoUrl: '',
+    nScreens: 8,
+    videoUrl: 'https://youtube.com/embed/J0CLX6Axdcs',
     videoDimensions: [undefined, undefined],
     storeUrl: 'https://play.google.com/store/apps/details?id=',
     bundle: 'com.downbeat.tacticsrush',
     description: 'Gather your troops and try to capture the enemy bunker.<br/><br/>\
         Can you get the high score?'
+}, {
+    id: 'balance-run',
+    title: 'Balance Run',
+    subtitle: 'Intense focus',
+    bannerImg: '',
+    url: '/balance-run',
+    nScreens: 5,
+    videoUrl: 'https://youtube.com/embed/QE5_AcfeJ7E',
+    videoDimensions: [undefined, undefined],
+    bundle: 'com.downbeat.polebalance',
+    description: 'Keep yourself balanced by moving blocks left or right as you run high above the ground. \
+        <br/>Try not to fall!'
 }];

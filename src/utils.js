@@ -12,15 +12,17 @@
     var url = 'https://play.google.com/store/apps/details?id='+bundle;
 
 
-    fetch(url).then(function (response) {
-      // The API call was successful!
-      return response.json();
-    }).then(function (data) {
-      // This is the JSON from our response
-      console.log(data);
-    }).catch(function (err) {
-      // There was an error
-      console.warn('Something went wrong.', err);
+    $.ajax({
+      type: "get",
+      url: "https://www-opensocial.googleusercontent.com/api/people/jacksonsdean/@self",
+      contentType: "application/json; charset=utf-8",
+      data: {},
+      success: function (result) {
+        image = result.entry.thumbnailUrl;
+        name = result.entry.displayName;
+      },
+      error: function () {
+      }
     });
     
     
