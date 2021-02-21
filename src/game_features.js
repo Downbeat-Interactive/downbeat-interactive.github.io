@@ -1,8 +1,6 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
 import {PrivacyLink, GamePageLink} from './common_components.js';
-import * as gplay from '../node_modules/google-play-scraper/index.js'
-
 
 class FeatureStoreButton extends React.Component{
     constructor(props){
@@ -93,9 +91,9 @@ class FeatureStoreButton extends React.Component{
     render(){
       
  
-gplay.app({appId: 'com.google.android.apps.translate'})
-  .then(console.log, console.log);
-    }
+// gplay.app({appId: 'com.google.android.apps.translate'})
+//   .then(console.log, console.log);
+//     }
 
   }
 export default GameFeatureFull;

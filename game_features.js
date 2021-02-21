@@ -10,7 +10,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import ErrorBoundary from './error_boundary.js';
 import { PrivacyLink, GamePageLink } from './common_components.js';
-import * as gplay from '../node_modules/google-play-scraper/index.js';
 
 var FeatureStoreButton = function (_React$Component) {
   _inherits(FeatureStoreButton, _React$Component);
