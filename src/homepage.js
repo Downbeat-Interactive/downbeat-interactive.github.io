@@ -70,13 +70,6 @@ class HomePageBannerArticle extends React.Component{
     var target = document.getElementById(this.props.link);
     const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({top: y, behavior: 'smooth'});
-    // target.scrollIntoView({
-    //   behavior: "smooth",
-    //   block: "start",
-    //   inline: "nearest"
-    // });
-  
-  
   }
 
   componentDidMount() {

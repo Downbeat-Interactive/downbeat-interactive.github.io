@@ -96,12 +96,6 @@ var HomePageBannerArticle = function (_React$Component2) {
       var target = document.getElementById(this.props.link);
       var y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
-      // target.scrollIntoView({
-      //   behavior: "smooth",
-      //   block: "start",
-      //   inline: "nearest"
-      // });
-
     }
   }, {
     key: 'componentDidMount',
