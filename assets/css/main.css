@@ -75,15 +75,19 @@
 }
 
 .game-screenshot{
-    width:40%;
+    width:25vw;
     padding: 5vh;
-    min-height: 400px;
     height: auto;
+    transition: 0.15s;
+    z-index: 0;
 }
 .game-screenshot:hover {
     transform: scale(1.4);
     z-index: 1;
+    transition: 0.5s;
+
   }
+
 
 .content {
     font-size: 2vh;
@@ -135,9 +139,35 @@
 }
 
 
-
 @keyframes show-dropdown-all {
     0% {
+        margin-top: -100%;
+    }
+    100% {
+        margin-top: 0%;
+        display: unset;
+    }
+}
+@-moz-keyframes show-dropdown-all{
+     0% {
+        margin-top: -100%;
+    }
+    100% {
+        margin-top: 0%;
+        display: unset;
+    }
+}
+@-webkit-keyframes show-dropdown-all{
+     0% {
+        margin-top: -100%;
+    }
+    100% {
+        margin-top: 0%;
+        display: unset;
+    }
+}
+@-ms-keyframes show-dropdown-all{
+     0% {
         margin-top: -100%;
     }
     100% {
