@@ -67,7 +67,7 @@ class FeatureStoreButton extends React.Component{
     }
   
     render() {
-      if(this.props.id!='default'){
+      if(this.props.id!='default' && this.props.id.length>0){
       return <ErrorBoundary>
      <BoxFull id={this.props.id} inner={<div>
                    <FeatureVideo url={this.props.videoUrl} id={this.props.id} />
@@ -85,7 +85,7 @@ class FeatureStoreButton extends React.Component{
                         <footer className="align-center" data-aos="zoom-in">
                            <FeatureStoreButton bundle={this.props.bundle}/>
                         </footer>
-                        <PrivacyLink url={this.props.url}/>
+                        <PrivacyLink url={this.props.url} show={this.props.showPrivacyURL}/>
                     </div>
                     </div>}/>
           </ErrorBoundary> }

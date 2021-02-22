@@ -126,7 +126,7 @@ var GameFeatureFull = function (_React$Component4) {
   _createClass(GameFeatureFull, [{
     key: 'render',
     value: function render() {
-      if (this.props.id != 'default') {
+      if (this.props.id != 'default' && this.props.id.length > 0) {
         return React.createElement(
           ErrorBoundary,
           null,
@@ -167,7 +167,7 @@ var GameFeatureFull = function (_React$Component4) {
                   { className: 'align-center', 'data-aos': 'zoom-in' },
                   React.createElement(FeatureStoreButton, { bundle: this.props.bundle })
                 ),
-                React.createElement(PrivacyLink, { url: this.props.url })
+                React.createElement(PrivacyLink, { url: this.props.url, show: this.props.showPrivacyURL })
               )
             ) })
         );

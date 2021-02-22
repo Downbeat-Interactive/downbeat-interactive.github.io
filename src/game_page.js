@@ -47,6 +47,7 @@ class GamePage extends React.Component{
                     bundle={game.bundle}
                     subtitle={game.subtitle}
                     videoDimensions={game.videoDimensions}
+                    showPrivacyURL = "true"
                 /></div>
                  <ErrorBoundary>
                     <GameFeatureScreenshots data={game}/>

@@ -67,7 +67,8 @@ var GamePage = function (_React$Component) {
                                 videoUrl: game.videoUrl,
                                 bundle: game.bundle,
                                 subtitle: game.subtitle,
-                                videoDimensions: game.videoDimensions
+                                videoDimensions: game.videoDimensions,
+                                showPrivacyURL: 'true'
                             })
                         ),
                         React.createElement(

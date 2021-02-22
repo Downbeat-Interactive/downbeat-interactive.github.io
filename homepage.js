@@ -43,31 +43,30 @@ var HomePageBanner = function (_React$Component) {
       var output = React.createElement(
         'section',
         { id: 'top-banner', className: 'banner full' },
-        React.createElement(
-          'article',
-          null,
-          React.createElement(
-            'video',
-            { id: 'banner-video', loop: true, muted: true, poster: 'images/intro.png' },
-            React.createElement('source', { src: 'images/intro.webm', type: 'video/webm' }),
-            React.createElement('source', { src: 'images/intro.mp4', type: 'video/mp4' }),
-            React.createElement('img', { id: 'first-img', src: 'images/intro.png', alt: '' })
-          ),
-          React.createElement(
-            'div',
-            { className: 'inner' },
-            React.createElement(
-              'header',
-              null,
-              React.createElement('p', null),
-              React.createElement(
-                'h2',
-                null,
-                'Welcome'
-              )
-            )
-          )
-        )
+        React.createElement(HomePageBannerArticle, {
+          id: 'first-img',
+          poster: 'images/intro.png',
+          webm: 'images/intro.webm',
+          mp4: 'images/intro.mp4',
+          title: 'Welcome',
+          subtitle: '',
+          link: '' }),
+        React.createElement(HomePageBannerArticle, {
+          poster: 'images/dandy-tiny.jpg',
+          webm: 'images/dandy-short.webm',
+          mp4: 'images/dandy-short.mp4',
+          title: 'Dandy Drift',
+          subtitle: 'Our Games',
+          link: 'dandy-drift'
+        }),
+        React.createElement(HomePageBannerArticle, {
+          poster: 'images/dance-background.jpg'
+          // webm="images/dance-background.webm" 
+          , mp4: 'images/dance-background.mp4',
+          title: 'Tactics Rush',
+          subtitle: 'Our Games',
+          link: 'tactics-rush'
+        })
       );
 
       return output;
@@ -77,8 +76,104 @@ var HomePageBanner = function (_React$Component) {
   return HomePageBanner;
 }(React.Component);
 
-var HomePageFeatures = function (_React$Component2) {
-  _inherits(HomePageFeatures, _React$Component2);
+var HomePageBannerArticle = function (_React$Component2) {
+  _inherits(HomePageBannerArticle, _React$Component2);
+
+  function HomePageBannerArticle(props) {
+    _classCallCheck(this, HomePageBannerArticle);
+
+    var _this2 = _possibleConstructorReturn(this, (HomePageBannerArticle.__proto__ || Object.getPrototypeOf(HomePageBannerArticle)).call(this, props));
+
+    _this2.props = props;
+    _this2.scrollTo = _this2.scrollTo.bind(_this2);
+    return _this2;
+  }
+
+  _createClass(HomePageBannerArticle, [{
+    key: 'scrollTo',
+    value: function scrollTo() {
+      var yOffset = -75;
+      var target = document.getElementById(this.props.link);
+      var y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      // target.scrollIntoView({
+      //   behavior: "smooth",
+      //   block: "start",
+      //   inline: "nearest"
+      // });
+
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var elem = document.getElementById("header-" + this.props.link);
+      if (elem != null) elem.addEventListener("click", this.scrollTo);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var header = null;
+      if (this.props.link.length > 0) {
+
+        header = React.createElement(
+          'a',
+          { id: "header-" + this.props.link, className: 'click-pointer' },
+          React.createElement(
+            'header',
+            null,
+            React.createElement(
+              'p',
+              null,
+              this.props.subtitle
+            ),
+            React.createElement(
+              'h2',
+              null,
+              this.props.title
+            )
+          )
+        );
+      } else {
+        header = React.createElement(
+          'header',
+          null,
+          React.createElement(
+            'p',
+            null,
+            this.props.subtitle
+          ),
+          React.createElement(
+            'h2',
+            null,
+            this.props.title
+          )
+        );
+      }
+
+      return React.createElement(
+        'article',
+        null,
+        React.createElement(
+          'video',
+          { id: 'banner-video', loop: true, muted: true, poster: this.props.poster },
+          React.createElement('source', { src: this.props.webm, type: 'video/webm' }),
+          React.createElement('source', { src: this.props.mp4, type: 'video/mp4' }),
+          React.createElement('img', { id: this.props.id, src: this.props.poster, alt: '' })
+        ),
+        React.createElement(
+          'div',
+          { className: 'inner', 'data-aos': 'flip-left', 'data-aos-delay': '200' },
+          header
+        )
+      );
+    }
+  }]);
+
+  return HomePageBannerArticle;
+}(React.Component);
+
+var HomePageFeatures = function (_React$Component3) {
+  _inherits(HomePageFeatures, _React$Component3);
 
   function HomePageFeatures() {
     _classCallCheck(this, HomePageFeatures);
@@ -100,9 +195,9 @@ var HomePageFeatures = function (_React$Component2) {
             url: game.url,
             description: game.description,
             videoUrl: game.videoUrl,
-            storeUrl: game.storeUrl,
             subtitle: game.subtitle,
-            videoDimensions: game.videoDimensions
+            videoDimensions: game.videoDimensions,
+            showPrivacyURL: 'false'
           });
         })
       );
@@ -112,8 +207,8 @@ var HomePageFeatures = function (_React$Component2) {
   return HomePageFeatures;
 }(React.Component);
 
-var HomePage = function (_React$Component3) {
-  _inherits(HomePage, _React$Component3);
+var HomePage = function (_React$Component4) {
+  _inherits(HomePage, _React$Component4);
 
   function HomePage() {
     _classCallCheck(this, HomePage);

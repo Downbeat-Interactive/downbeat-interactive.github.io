@@ -188,14 +188,14 @@ class NavigationMenu extends React.Component{
       this.props = props;
     }
     render(){
-      if(typeof this.props.url !== 'undefined' && this.props.url.length>0){
+      if(this.props.show=='true'&&typeof this.props.url !== 'undefined' && this.props.url.length>0){
           return (<ErrorBoundary showBack={false}>
             <a href={this.props.url+"/privacy-policy/"}><p>Privacy Policy</p></a>
           </ErrorBoundary>
         );
     }
     else
-        return <div/>
+        return null
     }
   }
 

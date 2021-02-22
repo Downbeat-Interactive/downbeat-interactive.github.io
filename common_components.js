@@ -362,7 +362,7 @@ var PrivacyLink = function (_React$Component5) {
   _createClass(PrivacyLink, [{
     key: 'render',
     value: function render() {
-      if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) {
+      if (this.props.show == 'true' && typeof this.props.url !== 'undefined' && this.props.url.length > 0) {
         return React.createElement(
           ErrorBoundary,
           { showBack: false },
@@ -376,7 +376,7 @@ var PrivacyLink = function (_React$Component5) {
             )
           )
         );
-      } else return React.createElement('div', null);
+      } else return null;
     }
   }]);
 
