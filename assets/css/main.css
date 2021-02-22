@@ -75,8 +75,8 @@
 }
 
 .game-screenshot{
-    width:25vw;
-    padding: 5vh;
+    width:20vw;
+    margin: 3vw;
     height: auto;
     transition: 0.15s;
     z-index: 0;
@@ -84,6 +84,9 @@
 .game-screenshot:hover {
     transform: scale(1.4);
     z-index: 1;
+    -webkit-box-shadow: 5px 6px 5px #808080;
+    -moz-box-shadow: 5px 6px 5px #808080;
+    box-shadow: 1px 2px 3px #808080;
     transition: 0.5s;
 
   }
