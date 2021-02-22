@@ -33,7 +33,7 @@ class GamePage extends React.Component{
             
           return (
             <div>
-                <Header/>
+                <Header fixed="true"/>
                 <NavigationMenu/>
                 <section className="wrapper style3 align-center">
                 <div className="game-page-feature-container">
@@ -58,7 +58,7 @@ class GamePage extends React.Component{
           );
         }
         else return( <div>
-            <Header/>
+            <Header fixed="true"/>
             <NavigationMenu/>
             <Content html={this.props.html}/>
             <Footer/>

@@ -50,7 +50,7 @@ var GamePage = function (_React$Component) {
                 return React.createElement(
                     'div',
                     null,
-                    React.createElement(Header, null),
+                    React.createElement(Header, { fixed: 'true' }),
                     React.createElement(NavigationMenu, null),
                     React.createElement(
                         'section',
@@ -82,7 +82,7 @@ var GamePage = function (_React$Component) {
             } else return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { fixed: 'true' }),
                 React.createElement(NavigationMenu, null),
                 React.createElement(Content, { html: this.props.html }),
                 React.createElement(Footer, null)

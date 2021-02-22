@@ -24,6 +24,21 @@ var NavigationMenu = function (_React$Component) {
   }
 
   _createClass(NavigationMenu, [{
+    key: 'clickMenu',
+    value: function clickMenu() {
+      var target = document.getElementById("menu");
+      target.style.zIndex = 10;
+      target.style.visibility = "visible";
+      target.style.transform = "translateX(0)";
+      var y = target.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.dandy == "true") document.getElementById("menu-button").addEventListener("click", this.clickMenu);
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -90,6 +105,7 @@ var GamesDropdown = function (_React$Component2) {
     _this2.props = props;
     _this2.clickExpandGames = _this2.clickExpandGames.bind(_this2);
     _this2.state = { listExpanded: false };
+
     return _this2;
   }
 
@@ -177,10 +193,13 @@ var GamesDropdown = function (_React$Component2) {
 var Header = function (_React$Component3) {
   _inherits(Header, _React$Component3);
 
-  function Header() {
+  function Header(props) {
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    var _this4 = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+    _this4.props = props;
+    return _this4;
   }
 
   _createClass(Header, [{
@@ -191,7 +210,7 @@ var Header = function (_React$Component3) {
         null,
         React.createElement(
           'header',
-          { id: 'header', className: 'alt' },
+          { id: 'header', className: this.props.fixed == "true" ? "" : "alt" },
           React.createElement(
             'div',
             { className: 'logo' },
@@ -208,7 +227,7 @@ var Header = function (_React$Component3) {
           ),
           React.createElement(
             'a',
-            { href: '#menu' },
+            { id: 'menu-button', href: '#menu' },
             'Menu'
           )
         )

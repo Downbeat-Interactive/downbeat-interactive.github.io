@@ -7,7 +7,20 @@ class NavigationMenu extends React.Component{
         super(props);
         this.props = props;
       }
+      clickMenu(){
+        var target = document.getElementById("menu");
+        target.style.zIndex = 10;
+        target.style.visibility="visible";
+        target.style.transform = "translateX(0)";
+        const y = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
     
+    
+      componentDidMount(){
+        if(this.props.dandy == "true")
+          document.getElementById("menu-button").addEventListener("click",this.clickMenu);
+      }
 
     render(){
 
@@ -40,8 +53,8 @@ class NavigationMenu extends React.Component{
       this.props = props;
       this.clickExpandGames = this.clickExpandGames.bind(this);
       this.state = {listExpanded: false};
+      
     }
-
 
 
   clickExpandGames(e){
@@ -81,10 +94,9 @@ class NavigationMenu extends React.Component{
   }
   componentDidMount() {
    document.getElementById("games-li").addEventListener("click",this.clickExpandGames);
-  }
-
   
 
+  }
     render(){
           return <li id= "games-li" className="game-list" key = "games">
             <a> <i class="fas fa-gamepad"></i>    Games   <i id="games-dropdown" class="fas fa-chevron-down"></i></a>
@@ -102,12 +114,17 @@ class NavigationMenu extends React.Component{
 
 
   class Header extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
+
     render(){
       return (
         <ErrorBoundary>
-        <header id="header" className="alt">
+        <header id="header" className={this.props.fixed=="true"?"":"alt"}>
           <div className="logo"><a href="/">Downbeat <span>| Interactive LLC</span></a></div>
-          <a href="#menu">Menu</a>
+          <a id="menu-button" href="#menu">Menu</a>
         </header>
         </ErrorBoundary>
       )

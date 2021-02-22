@@ -97,7 +97,8 @@
 }
 
 .feature-video{
-    overflow: hidden"
+    overflow: "hidden";
+    background-color: #FFFFFF
 }
 
 .no-bullets{
@@ -144,10 +145,12 @@
 
 @keyframes show-dropdown-all {
     0% {
-        margin-top: -100%;
+        /* margin-top: -20%; */
+        transform: translateY(-90);
     }
     100% {
-        margin-top: 0%;
+        /* margin-top: 0%; */
+        transform: translateY(0);
         display: unset;
     }
 }
