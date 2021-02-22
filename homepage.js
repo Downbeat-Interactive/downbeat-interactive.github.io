@@ -57,17 +57,13 @@ var HomePageBanner = function (_React$Component) {
             'div',
             { className: 'inner' },
             React.createElement(
-              'a',
-              { href: '#about' },
+              'header',
+              null,
+              React.createElement('p', null),
               React.createElement(
-                'header',
+                'h2',
                 null,
-                React.createElement('p', null),
-                React.createElement(
-                  'h2',
-                  null,
-                  'Welcome'
-                )
+                'Welcome'
               )
             )
           )

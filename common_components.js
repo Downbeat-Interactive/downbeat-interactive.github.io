@@ -10,7 +10,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import ErrorBoundary from './error_boundary.js';
 import data from './game_data.js';
-import GameFeatureFull from './game_features.js';
 
 var NavigationMenu = function (_React$Component) {
   _inherits(NavigationMenu, _React$Component);
@@ -27,6 +26,7 @@ var NavigationMenu = function (_React$Component) {
   _createClass(NavigationMenu, [{
     key: 'render',
     value: function render() {
+
       return React.createElement(
         ErrorBoundary,
         null,
@@ -42,30 +42,32 @@ var NavigationMenu = function (_React$Component) {
               React.createElement(
                 'a',
                 { href: '/' },
-                'Home'
+                React.createElement('i', { 'class': 'fas fa-home' }),
+                '    Home'
               )
             ),
-            data.map(function (game) {
-              return React.createElement(
-                'li',
-                {
-                  key: game.id,
-                  title: game.title
-                },
-                React.createElement(
-                  'a',
-                  { href: game.url },
-                  game.title
-                )
-              );
-            }),
+            React.createElement(GamesDropdown, null),
             React.createElement(
               'li',
               null,
               React.createElement(
                 'a',
                 { target: '_blank', href: 'https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f' },
-                'Contact Us'
+                React.createElement('i', { 'class': 'fas fa-envelope' }),
+                '    Contact Us'
+              )
+            ),
+            React.createElement(
+              'li',
+              null,
+              ' ',
+              React.createElement(
+                'a',
+                { target: '_blank',
+                  href: 'http://eepurl.com/hqpHjL'
+                },
+                React.createElement('i', { 'class': 'fas fa-bullhorn' }),
+                '    Get our newsletter'
               )
             )
           )
@@ -77,8 +79,103 @@ var NavigationMenu = function (_React$Component) {
   return NavigationMenu;
 }(React.Component);
 
-var Header = function (_React$Component2) {
-  _inherits(Header, _React$Component2);
+var GamesDropdown = function (_React$Component2) {
+  _inherits(GamesDropdown, _React$Component2);
+
+  function GamesDropdown(props) {
+    _classCallCheck(this, GamesDropdown);
+
+    var _this2 = _possibleConstructorReturn(this, (GamesDropdown.__proto__ || Object.getPrototypeOf(GamesDropdown)).call(this, props));
+
+    _this2.props = props;
+    _this2.clickExpandGames = _this2.clickExpandGames.bind(_this2);
+    _this2.state = { listExpanded: false };
+    return _this2;
+  }
+
+  _createClass(GamesDropdown, [{
+    key: 'clickExpandGames',
+    value: function clickExpandGames(e) {
+      var _this3 = this;
+
+      // e.preventDefault();
+      // e.stopPropagation();
+      this.setState(function (state, props) {
+        return { listExpanded: !_this3.state.listExpanded };
+      });
+
+      var list = document.getElementById("game-list");
+
+      var dropdown = document.getElementById("games-dropdown");
+      if (this.state.listExpanded) {
+        dropdown.classList.remove("fa-chevron-down");
+        dropdown.classList.add("fa-chevron-up");
+        list.classList.add("show");
+        list.classList.remove("hide");
+        var index = 0;
+        list.childNodes.forEach(function (element) {
+          element.classList.remove("hide");
+          element.classList.add("show-" + index);
+          index++;
+        });
+      } else {
+        dropdown.classList.remove("fa-chevron-up");
+        dropdown.classList.add("fa-chevron-down");
+        list.classList.add("hide");
+        list.classList.remove("show");
+        var index = 0;
+        list.childNodes.forEach(function (element) {
+          element.classList.add("hide");
+          element.classList.remove("show-" + index);
+          index++;
+        });
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      document.getElementById("games-li").addEventListener("click", this.clickExpandGames);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'li',
+        { id: 'games-li', className: 'game-list', key: 'games' },
+        React.createElement(
+          'a',
+          null,
+          ' ',
+          React.createElement('i', { 'class': 'fas fa-gamepad' }),
+          '    Games   ',
+          React.createElement('i', { id: 'games-dropdown', 'class': 'fas fa-chevron-down' })
+        ),
+        React.createElement(
+          'ul',
+          { id: 'game-list', className: 'links align-right hide' },
+          data.filter(function (game) {
+            return game.title.length > 0;
+          }).map(function (game) {
+            return React.createElement(
+              'li',
+              { className: 'game-list-item hide', key: game.id, title: game.title },
+              React.createElement(
+                'a',
+                { href: game.url },
+                game.title
+              )
+            );
+          })
+        )
+      );
+    }
+  }]);
+
+  return GamesDropdown;
+}(React.Component);
+
+var Header = function (_React$Component3) {
+  _inherits(Header, _React$Component3);
 
   function Header() {
     _classCallCheck(this, Header);
@@ -122,8 +219,8 @@ var Header = function (_React$Component2) {
   return Header;
 }(React.Component);
 
-var Socials = function (_React$Component3) {
-  _inherits(Socials, _React$Component3);
+var Socials = function (_React$Component4) {
+  _inherits(Socials, _React$Component4);
 
   function Socials() {
     _classCallCheck(this, Socials);
@@ -250,16 +347,16 @@ var Socials = function (_React$Component3) {
   return Socials;
 }(React.Component);
 
-var PrivacyLink = function (_React$Component4) {
-  _inherits(PrivacyLink, _React$Component4);
+var PrivacyLink = function (_React$Component5) {
+  _inherits(PrivacyLink, _React$Component5);
 
   function PrivacyLink(props) {
     _classCallCheck(this, PrivacyLink);
 
-    var _this4 = _possibleConstructorReturn(this, (PrivacyLink.__proto__ || Object.getPrototypeOf(PrivacyLink)).call(this, props));
+    var _this6 = _possibleConstructorReturn(this, (PrivacyLink.__proto__ || Object.getPrototypeOf(PrivacyLink)).call(this, props));
 
-    _this4.props = props;
-    return _this4;
+    _this6.props = props;
+    return _this6;
   }
 
   _createClass(PrivacyLink, [{
@@ -286,16 +383,16 @@ var PrivacyLink = function (_React$Component4) {
   return PrivacyLink;
 }(React.Component);
 
-var GamePageLink = function (_React$Component5) {
-  _inherits(GamePageLink, _React$Component5);
+var GamePageLink = function (_React$Component6) {
+  _inherits(GamePageLink, _React$Component6);
 
   function GamePageLink(props) {
     _classCallCheck(this, GamePageLink);
 
-    var _this5 = _possibleConstructorReturn(this, (GamePageLink.__proto__ || Object.getPrototypeOf(GamePageLink)).call(this, props));
+    var _this7 = _possibleConstructorReturn(this, (GamePageLink.__proto__ || Object.getPrototypeOf(GamePageLink)).call(this, props));
 
-    _this5.props = props;
-    return _this5;
+    _this7.props = props;
+    return _this7;
   }
 
   _createClass(GamePageLink, [{
@@ -323,8 +420,8 @@ var GamePageLink = function (_React$Component5) {
   return GamePageLink;
 }(React.Component);
 
-var Footer = function (_React$Component6) {
-  _inherits(Footer, _React$Component6);
+var Footer = function (_React$Component7) {
+  _inherits(Footer, _React$Component7);
 
   function Footer() {
     _classCallCheck(this, Footer);
@@ -366,16 +463,16 @@ var Footer = function (_React$Component6) {
   return Footer;
 }(React.Component);
 
-var Content = function (_React$Component7) {
-  _inherits(Content, _React$Component7);
+var Content = function (_React$Component8) {
+  _inherits(Content, _React$Component8);
 
   function Content(props) {
     _classCallCheck(this, Content);
 
-    var _this7 = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
+    var _this9 = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
 
-    _this7.props = props;
-    return _this7;
+    _this9.props = props;
+    return _this9;
   }
 
   _createClass(Content, [{

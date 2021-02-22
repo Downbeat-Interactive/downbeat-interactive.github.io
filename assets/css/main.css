@@ -77,6 +77,7 @@
 .game-screenshot{
     width:40%;
     padding: 5vh;
+    min-height: 400px;
     height: auto;
 }
 .game-screenshot:hover {
@@ -119,6 +120,178 @@
 .no-decoration{
     text-decoration: none;
 }
+#game-list.hide{
+    display: none;
+}
+
+#game-list.show{
+    -moz-animation: show-dropdown-all 0.165s ease-in-out;
+    -webkit-animation: show-dropdown-all 0.165s ease-in-out;
+    -ms-animation: show-dropdown-all 0.165s ease-in-out;
+    animation: show-dropdown-all 0.165s ease-in-out;
+}
+.game-list-item.hide{
+    display: none;
+}
+
+
+
+@keyframes show-dropdown-all {
+    0% {
+        margin-top: -100%;
+    }
+    100% {
+        margin-top: 0%;
+        display: unset;
+    }
+}
+
+
+.game-list-item.show-0{
+    -moz-animation: show-dropdown-item 0.3s ease;
+    -webkit-animation: show-dropdown-item 0.3s ease;
+    -ms-animation: show-dropdown-item 0.3s ease;
+    animation: show-dropdown-item 0.3s ease;
+}
+.game-list-item.show-1{
+    -moz-animation: show-dropdown-item 0.45s ease;
+    -webkit-animation: show-dropdown-item 0.45s ease;
+    -ms-animation: show-dropdown-item 0.45s ease;
+    animation: show-dropdown-item 0.45s ease;
+}
+.game-list-item.show-2{
+    -moz-animation: show-dropdown-item 0.60s ease;
+    -webkit-animation: show-dropdown-item 0.60s ease;
+    -ms-animation: show-dropdown-item 0.60s ease;
+    animation: show-dropdown-item 0.60s ease;
+}
+
+.game-list-item.show-3{
+    -moz-animation: show-dropdown-item 0.75s ease;
+    -webkit-animation: show-dropdown-item 0.75s ease;
+    -ms-animation: show-dropdown-item 0.75s ease;
+    animation: show-dropdown-item 0.75s ease;
+}
+.game-list-item.show-4{
+    -moz-animation: show-dropdown-item 0.90s ease;
+    -webkit-animation: show-dropdown-item 0.90s ease;
+    -ms-animation: show-dropdown-item 0.90s ease;
+    animation: show-dropdown-item 0.90s ease;
+}
+.game-list-item.show-5{
+    -moz-animation: show-dropdown-item 0.105s ease;
+    -webkit-animation: show-dropdown-item 0.105s ease;
+    -ms-animation: show-dropdown-item 0.105s ease;
+    animation: show-dropdown-item 0.105s ease;
+}
+.game-list-item.show-5{
+    -moz-animation: show-dropdown-item 0.120s ease;
+    -webkit-animation: show-dropdown-item 0.120s ease;
+    -ms-animation: show-dropdown-item 0.120s ease;
+    animation: show-dropdown-item 0.120s ease;
+}
+.game-list-item.show-6{
+    -moz-animation: show-dropdown-item 0.135s ease;
+    -webkit-animation: show-dropdown-item 0.135s ease;
+    -ms-animation: show-dropdown-item 0.135s ease;
+    animation: show-dropdown-item 0.135s ease;
+}
+.game-list-item.show-7{
+    -moz-animation: show-dropdown-item 0.150s ease;
+    -webkit-animation: show-dropdown-item 0.150s ease;
+    -ms-animation: show-dropdown-item 0.150s ease;
+    animation: show-dropdown-item 0.150s ease;
+}
+.game-list-item.show-8{
+    -moz-animation: show-dropdown-item 0.165s ease;
+    -webkit-animation: show-dropdown-item 0.165s ease;
+    -ms-animation: show-dropdown-item 0.165s ease;
+    animation: show-dropdown-item 0.165s ease;
+}
+
+@keyframes show-dropdown-item {
+    0% {
+        opacity: 0;
+        margin-right: -20%;
+    }
+    100% {
+        opacity: 1;
+        margin-right: 0%;
+        display: unset;
+    }
+}
+
+@-moz-keyframes show-dropdown-item {
+ 0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        display: unset;
+    }
+
+}
+    @-webkit-keyframes show-dropdown-item {
+    0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+            display: unset;
+    }
+
+    }
+    @-ms-keyframes show-dropdown-item {
+        0% {
+            opacity: 0;
+            margin-right: -20%;
+        }
+        100% {
+            opacity: 1;
+            margin-right: 0%;
+            display: unset;
+        }
+    }
+
+.game-list{
+   cursor: pointer;
+  
+}
+
+
+.game-list>ul.links {
+    list-style: none;
+    padding: 0;
+}
+
+.game-list>ul.links>li {
+    padding: 0 0 0 20%;
+    
+}
+
+.game-list>ul.links>li>a:not(.button) {
+    border: 0;
+    border-top: solid 1px rgba(255, 255, 255, 0.125);
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    line-height: 3.5rem;
+    text-decoration: none;
+    /* text-transform: uppercase; */
+}
+
+.game-list>ul.links>li>a:not(.button):hover {
+    color: #FFF;
+}
+
+#menu>ul.links>li>.button {
+    display: block;
+    margin: 0.5rem 0 0 0;
+}
+
+#menu>ul.links>li:first-child>a:not(.button) {
+    border-top: 0 !important;
+}
+
 
 /*End Jackson Custom*/
 

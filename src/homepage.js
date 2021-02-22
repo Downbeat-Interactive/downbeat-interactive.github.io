@@ -30,14 +30,13 @@ class HomePageBanner extends React.Component{
           <img id="first-img" src="images/intro.png" alt="" />
       </video>
         <div className="inner">
-            <a href="#about">
                 <header>
                     <p></p>
                     <h2>Welcome</h2>
                 </header>
-            </a>
         </div>
     </article>
+   
   </section>)
    
 

@@ -1,39 +1,106 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
 import data from './game_data.js'
-import GameFeatureFull from './game_features.js';
 
 class NavigationMenu extends React.Component{
     constructor(props){
         super(props);
         this.props = props;
-    }
+      }
+    
 
     render(){
+
       return (
         <ErrorBoundary>
         <nav id="menu">
-        
           <ul className="links">
-         
             <li key="home">
-              <a href="/">Home</a>
+              <a href="/"><i class="fas fa-home"></i>    Home</a>
             </li>
-                {data.map(game => (
-                <li  
-                key={game.id} 
-                title={game.title} 
-                ><a href ={game.url}>{game.title}</a></li>
-                ))}
-                <li><a target = "_blank" href="https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f">Contact Us</a></li>
+              <GamesDropdown />
+            <li><a target = "_blank" href="https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f">
+                <i class="fas fa-envelope"></i>    Contact Us</a></li>
+            <li> <a target="_blank"
+                        href="http://eepurl.com/hqpHjL"
+                      ><i class="fas fa-bullhorn"></i>    Get our newsletter</a></li>
           </ul>
         </nav>
         </ErrorBoundary>
+
       );
   
     }
   }
   
+
+  class GamesDropdown extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+      this.clickExpandGames = this.clickExpandGames.bind(this);
+      this.state = {listExpanded: false};
+    }
+
+
+
+  clickExpandGames(e){
+    // e.preventDefault();
+    // e.stopPropagation();
+    this.setState((state,props) => ({ listExpanded: !this.state.listExpanded    }));
+
+    var list = document.getElementById("game-list");
+
+    var dropdown = document.getElementById("games-dropdown");
+    if(this.state.listExpanded){
+      dropdown.classList.remove("fa-chevron-down");
+      dropdown.classList.add("fa-chevron-up");
+      list.classList.add("show");
+      list.classList.remove("hide");
+      var index = 0;
+      list.childNodes.forEach(element => {
+        element.classList.remove("hide");
+        element.classList.add("show-"+index);
+        index++;
+      });
+    }
+    else{
+      dropdown.classList.remove("fa-chevron-up");
+      dropdown.classList.add("fa-chevron-down");
+      list.classList.add("hide");
+      list.classList.remove("show");
+      var index = 0;
+      list.childNodes.forEach(element => {
+        element.classList.add("hide");
+        element.classList.remove("show-"+index);
+        index++;
+      });
+    }
+
+
+  }
+  componentDidMount() {
+   document.getElementById("games-li").addEventListener("click",this.clickExpandGames);
+  }
+
+  
+
+    render(){
+          return <li id= "games-li" className="game-list" key = "games">
+            <a> <i class="fas fa-gamepad"></i>    Games   <i id="games-dropdown" class="fas fa-chevron-down"></i></a>
+                <ul id="game-list" className="links align-right hide">
+                    {data.filter(game=>game.title.length>0).map(game => (
+                      <li className="game-list-item hide"key={game.id} title={game.title}>
+                        <a href ={game.url}>{game.title}</a>
+                      </li>
+                    ))}
+              </ul>
+            </li>
+    }
+
+  }
+
+
   class Header extends React.Component{
     render(){
       return (
