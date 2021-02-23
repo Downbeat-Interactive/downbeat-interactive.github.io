@@ -81,6 +81,7 @@
     transition: 0.15s;
     z-index: 0;
 }
+
 .game-screenshot:hover {
     transform: scale(1.4);
     z-index: 1;
@@ -91,6 +92,12 @@
 
   }
 
+  .screenshot-container{
+    display: block;
+    margin: auto;
+  }
+
+    
 
 .content {
     font-size: 2vh;
@@ -420,6 +427,16 @@ time,
 mark,
 audio,
 video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    scroll-behavior: smooth;
+}
+
+.reset{
     margin: 0;
     padding: 0;
     border: 0;

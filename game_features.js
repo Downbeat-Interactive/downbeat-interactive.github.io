@@ -201,7 +201,11 @@ var GameFeatureScreenshots = function (_React$Component5) {
 
         output.push();
         for (var i = 0; i < this.data.nScreens; i++) {
-          output.push(React.createElement('img', { className: 'game-screenshot', src: this.props.data.url + "/screens/" + i.toString() + ".png" }));
+          output.push(React.createElement(
+            'a',
+            null,
+            React.createElement('img', { className: 'game-screenshot', src: this.props.data.url + "/screens/" + i.toString() + ".png" })
+          ));
         }
 
         return React.createElement(BoxFull, { id: this.props.data.id, inner: React.createElement(
@@ -209,7 +213,7 @@ var GameFeatureScreenshots = function (_React$Component5) {
             { className: 'content' },
             React.createElement(
               'header',
-              { className: 'align-center', 'data-aos': 'slide-left', 'data-aos-duration': '400' },
+              { className: 'align-center', 'data-aos': 'slide-left', 'data-aos-mirror': 'false', 'data-aos-duration': '400' },
               React.createElement(
                 'p',
                 null,
@@ -217,7 +221,7 @@ var GameFeatureScreenshots = function (_React$Component5) {
               ),
               React.createElement(
                 'a',
-                { className: 'no-decoration', href: this.props.data.url },
+                { className: 'no-decoration' },
                 React.createElement(
                   'h2',
                   { className: 'feature-title' },
@@ -230,7 +234,12 @@ var GameFeatureScreenshots = function (_React$Component5) {
               { className: 'align-center feature-content' },
               React.createElement('br', null)
             ),
-            output
+            React.createElement(
+              'div',
+              { className: 'screenshots-container', 'data-aos': 'flip-left', 'data-aos-duration': '500' },
+              output
+            ),
+            React.createElement('div', null)
           )
 
         });

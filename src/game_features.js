@@ -110,19 +110,22 @@ class FeatureStoreButton extends React.Component{
 
           output.push( );
           for(var i=0; i<this.data.nScreens; i++){
-              output.push(<img className="game-screenshot"  src={this.props.data.url + "/screens/"+i.toString() + ".png"}/>);
+              output.push(<a><img className="game-screenshot" src={this.props.data.url + "/screens/"+i.toString() + ".png"}/></a>);
           }     
 
          return <BoxFull id={this.props.data.id} inner={
            <div className="content">
-            <header className="align-center" data-aos="slide-left" data-aos-duration="400">
+            <header className="align-center" data-aos="slide-left" data-aos-mirror="false" data-aos-duration="400">
                             <p>{this.props.data.title}</p>
-                            <a className = "no-decoration" href={this.props.data.url}><h2 className="feature-title">Screenshots</h2></a>
+                            <a className = "no-decoration" ><h2 className="feature-title">Screenshots</h2></a>
                         </header>
                         <div className="align-center feature-content"  >
                           <br/>
                         </div>
+                 <div className="screenshots-container" data-aos="flip-left" data-aos-duration="500">
                  {output}
+                 </div>
+                 <div/>
            </div>
            }
 
