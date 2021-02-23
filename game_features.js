@@ -201,7 +201,7 @@ var ReleaseDate = function (_React$Component5) {
       if (this.date !== undefined && this.date.length > 0 && this.date != "") {
         return React.createElement(
           'div',
-          { 'data-aos': 'flip-up', className: 'align-center release-date' },
+          { 'data-aos': 'flip-up', 'data-aos-delay': '100', className: 'align-center release-date' },
           React.createElement(
             'p',
             null,

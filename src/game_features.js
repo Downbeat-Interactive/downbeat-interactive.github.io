@@ -106,7 +106,7 @@ class ReleaseDate extends React.Component{
 
   render(){
       if(this.date!== undefined && this.date.length> 0 &&this.date != ""){
-        return <div data-aos="flip-up" className="align-center release-date"><p><i>Released {this.date}</i></p></div>
+        return <div data-aos="flip-up" data-aos-delay="100" className="align-center release-date"><p><i>Released {this.date}</i></p></div>
       }
 
       else 
