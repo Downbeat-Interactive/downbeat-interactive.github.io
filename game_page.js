@@ -59,15 +59,8 @@ var GamePage = function (_React$Component) {
                             'div',
                             { className: 'game-page-feature-container' },
                             React.createElement(GameFeatureFull, {
-                                key: game.id,
-                                id: game.id,
-                                title: game.title,
-                                url: game.url,
-                                description: game.description,
-                                videoUrl: game.videoUrl,
-                                bundle: game.bundle,
-                                subtitle: game.subtitle,
-                                videoDimensions: game.videoDimensions,
+                                data: game,
+                                showPlayStoreButton: 'true',
                                 showPrivacyURL: 'true'
                             })
                         ),

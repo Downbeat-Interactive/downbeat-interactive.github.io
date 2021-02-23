@@ -102,7 +102,24 @@
 .content {
     font-size: 2vh;
 }
-
+.release-date{
+    margin-bottom: 0;
+    color: #a6a6a6;
+    vertical-align: text-bottom;
+    padding: 0;
+    
+}
+.release-date>p{
+    vertical-align: text-bottom;
+    margin: 0;
+    padding: 0 !important;
+    
+}
+.release-date>p>i{
+    text-transform: none;
+    vertical-align: text-bottom;
+    
+}
 .feature-video{
     overflow: "hidden";
     background-color: #FFFFFF

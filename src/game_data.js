@@ -9,6 +9,7 @@ export default [
         videoUrl:'',
         storeUrl:'',
         bundle:'',
+        releaseDate:'',
         videoDimensions: [undefined, undefined],
         description: ''
     },
@@ -23,6 +24,7 @@ export default [
         videoUrl:'https://www.youtube.com/embed/ALo7LZK3vUU',
         videoDimensions: [undefined, undefined],
         bundle:'com.Jackson.DandyDrift',
+        releaseDate:'November 2020',
         description:    '<div class="feature-list">\
                             Dandy Drift is a casual game about drifting on a river.<br/><br/>\
                             <ul className="align-left">\
@@ -43,6 +45,7 @@ export default [
         nScreens:5,
         videoUrl:'https://www.youtube.com/embed/eqQxFkQ41Bo',
         bundle:'com.Jackson.DebrisDash',
+        releaseDate:'January 2021',
         videoDimensions: [560,315],
         description: 'You\'re rushing down the highway at top speed with no control. Frantically drag obstacles out of the road before you crash!\
             <br/><br/>In Road Trip Rush, you don\'t control the car. Instead, you have to move physically-simulated debris out of the road by dragging and flicking.\
@@ -59,6 +62,7 @@ export default [
         videoUrl:'https://youtube.com/embed/gjkYDLshdtU',
         videoDimensions: [undefined, undefined],
         bundle:'com.downbeat.swiperun',
+        releaseDate:'February 2021',
         description: 'Swipe obstacles out of the way as you sprint along the rooftops!\
         <br/>Can you make it to the goal?\
         '
@@ -74,6 +78,7 @@ export default [
         videoDimensions: [undefined, undefined],
         storeUrl:'https://play.google.com/store/apps/details?id=',
         bundle:'com.downbeat.tacticsrush',
+        releaseDate:'February 2021',
         description: 'Gather your troops and try to capture the enemy bunker.<br/><br/>\
         Can you get the high score?'
     },
@@ -88,6 +93,7 @@ export default [
         videoUrl:'https://youtube.com/embed/QE5_AcfeJ7E',
         videoDimensions: [undefined, undefined],
         bundle:'com.downbeat.polebalance',
+        releaseDate:'January 2021',
         description: 'Keep yourself balanced by moving blocks left or right as you run high above the ground. \
         <br/>Try not to fall!'
     }

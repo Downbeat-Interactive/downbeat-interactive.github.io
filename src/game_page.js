@@ -38,17 +38,11 @@ class GamePage extends React.Component{
                 <section className="wrapper style3 align-center">
                 <div className="game-page-feature-container">
                 <GameFeatureFull  
-                    key={game.id} 
-                    id={game.id} 
-                    title={game.title} 
-                    url={game.url} 
-                    description={game.description} 
-                    videoUrl={game.videoUrl}
-                    bundle={game.bundle}
-                    subtitle={game.subtitle}
-                    videoDimensions={game.videoDimensions}
-                    showPrivacyURL = "true"
-                /></div>
+                data={game} 
+                showPlayStoreButton = "true"
+                showPrivacyURL = "true"
+                />
+               </div>
                  <ErrorBoundary>
                     <GameFeatureScreenshots data={game}/>
                 </ErrorBoundary>

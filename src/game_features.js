@@ -10,7 +10,7 @@ class FeatureStoreButton extends React.Component{
     }
   
     render(){
-      if(typeof this.props.bundle !== 'undefined' && this.props.bundle.length>0)
+      if(this.props.show=="true" && typeof this.props.bundle !== 'undefined' && this.props.bundle.length>0)
         return <a target="_blank" href={"https://play.google.com/store/apps/details?id="+this.props.bundle}><img className="image-button" src="/images/google-play-download.png" alt="See on Google Play"/></a>
       else
         return <div/>
@@ -64,28 +64,30 @@ class FeatureStoreButton extends React.Component{
     constructor(props){
       super(props);
       this.props = props;
+      this.data = props.data;
     }
   
     render() {
-      if(this.props.id!='default' && this.props.id.length>0){
+      if(this.data.id!='default' && this.data.id.length>0){
       return <ErrorBoundary>
-     <BoxFull id={this.props.id} inner={<div>
-                   <FeatureVideo url={this.props.videoUrl} id={this.props.id} />
+     <BoxFull id={this.data.id} inner={<div>
+                   <FeatureVideo url={this.data.videoUrl} id={this.data.id} />
                     <div className="content">
                         <header className="align-center" data-aos="slide-left" data-aos-duration="400">
-                            <p>{this.props.subtitle}</p>
-                            <a className = "no-decoration" href={this.props.url}><h2 className="feature-title">{this.props.title}</h2></a>
+                            <p>{this.data.subtitle}</p>
+                            <a className = "no-decoration" href={this.data.url}><h2 className="feature-title">{this.data.title}</h2></a>
                         </header>
                         <div className="align-center feature-content" data-aos="fade-up"  >
-                          <div dangerouslySetInnerHTML={{__html: this.props.description, sanitize: true}} />
+                          <div dangerouslySetInnerHTML={{__html: this.data.description, sanitize: true}} />
                           <br/>
-                         <GamePageLink url={this.props.url}/>
+                         <GamePageLink url={this.data.url}/>
                         </div>
                           
                         <footer className="align-center" data-aos="zoom-in">
-                           <FeatureStoreButton bundle={this.props.bundle}/>
+                            <FeatureStoreButton show = {this.props.showPlayStoreButton}bundle={this.data.bundle}/>
                         </footer>
-                        <PrivacyLink url={this.props.url} show={this.props.showPrivacyURL}/>
+                        <PrivacyLink url={this.data.url} show={this.props.showPrivacyURL}/>
+                           <ReleaseDate date = {this.data.releaseDate}/>
                     </div>
                     </div>}/>
           </ErrorBoundary> }
@@ -95,7 +97,22 @@ class FeatureStoreButton extends React.Component{
     }
   }
 
+class ReleaseDate extends React.Component{
+  constructor(props){
+    super(props);
+    this.props = props;
+    this.date = this.props.date;
+  }
 
+  render(){
+      if(this.date!== undefined && this.date.length> 0 &&this.date != ""){
+        return <div data-aos="flip-up" className="align-center release-date"><p><i>Released {this.date}</i></p></div>
+      }
+
+      else 
+        return null;
+  }
+}
 
   class GameFeatureScreenshots extends React.Component{
     constructor(props){

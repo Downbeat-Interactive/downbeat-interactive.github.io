@@ -117,15 +117,9 @@ class HomePageFeatures extends React.Component{
   render(){
     return <ErrorBoundary showBack={true}>
     {data.map(game => (
-      <GameFeatureFull  
-        key={game.id} 
-        id={game.id} 
-        title={game.title} 
-        url={game.url} 
-        description={game.description} 
-        videoUrl={game.videoUrl}
-        subtitle={game.subtitle}
-        videoDimensions={game.videoDimensions}
+      <GameFeatureFull
+        data={game} 
+        showPlayStoreButton = "false"
         showPrivacyURL = "false"
         />
     ))}

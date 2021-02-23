@@ -183,14 +183,8 @@ var HomePageFeatures = function (_React$Component3) {
         { showBack: true },
         data.map(function (game) {
           return React.createElement(GameFeatureFull, {
-            key: game.id,
-            id: game.id,
-            title: game.title,
-            url: game.url,
-            description: game.description,
-            videoUrl: game.videoUrl,
-            subtitle: game.subtitle,
-            videoDimensions: game.videoDimensions,
+            data: game,
+            showPlayStoreButton: 'false',
             showPrivacyURL: 'false'
           });
         })
