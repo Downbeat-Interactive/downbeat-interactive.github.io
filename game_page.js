@@ -11,11 +11,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import ErrorBoundary from './error_boundary.js';
 import { GameFeatureFull, GameFeatureScreenshots } from './game_features.js';
 import data from './game_data.js';
+import { comingSoonData } from './game_data.js';
 import { Header, Footer, NavigationMenu, Content } from './common_components.js';
 
 var domContainer = document.querySelector('#app_container');
 
 function getData(id) {
+    if (id == comingSoonData.id) {
+        return comingSoonData;
+    }
+
     for (var i = 0; i < data.length; i++) {
         var game = data[i];
         if (game.id == id) {

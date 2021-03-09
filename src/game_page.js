@@ -2,11 +2,16 @@
 import ErrorBoundary from './error_boundary.js';
 import {GameFeatureFull, GameFeatureScreenshots} from './game_features.js';
 import data from './game_data.js'
+import {comingSoonData} from './game_data.js'
 import {Header, Footer, NavigationMenu, Content} from './common_components.js'
 
 let domContainer = document.querySelector('#app_container');
 
 function getData(id){
+    if(id == comingSoonData.id){
+        return comingSoonData;
+    }
+
     for (let i = 0; i < data.length; i++) {
         const game = data[i];
         if(game.id == id){

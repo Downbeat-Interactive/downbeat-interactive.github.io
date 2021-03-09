@@ -98,3 +98,20 @@ export default [
         <br/>Try not to fall!'
     }
   ]
+
+
+
+  export var comingSoonData = 
+    {
+        id: 'coming-soon',
+        title: 'Coming Soon',
+        subtitle: 'Check back later',
+        bannerImg: '',
+        url: '',
+        nScreens:0,
+        videoUrl:'',
+        videoDimensions: [undefined, undefined],
+        bundle:'',
+        releaseDate:'',
+        description: 'We\'re working on new projects all the time, come back in a bit to see what\'s new!'
+    }
