@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+  <h2>Arbitage</h2>
+  <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+  <script src="./index.js" type="text/javascript"></script>
+
+  <p id="address"></p>
+  <p>token0:  <input type="text" id="token0" value="0x"></p>
+  <p>token1:  <input type="text" id="token1" value="0x"></p>
+  <p>amount0: <input type="text" id="amount0" value="0"></p>
+  <p>amount1: <input type="text" id="amount1" value="0"></p>
+
+  <br/><hr/>
+
+
+
+  <input id="connect" value="Connect" type="button" onclick="  ethereum.request({ method: 'eth_requestAccounts' });" />
+  
+  
+  <input id="start"  value="Start" type="button" onclick="  start();
+             "
+    />
+
+  
+
+
+</body>
+
+</html>
