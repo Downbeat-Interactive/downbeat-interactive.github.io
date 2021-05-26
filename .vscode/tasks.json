@@ -8,6 +8,12 @@
             "type": "shell",
             "command": "npx babel --watch src --out-dir . --presets react-app/prod",
             "auto": true
+        },
+        {
+            "label": "Auto Compile Blog JSX",
+            "type": "shell",
+            "command": "npx babel --watch ./blog/src --out-dir ./blog/. --presets react-app/prod",
+            "auto": true
         }
     ]
 }

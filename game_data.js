@@ -81,7 +81,7 @@ export default [{
     bannerImg: '',
     url: '/balance-run',
     nScreens: 5,
-    videoUrl: 'https://youtube.com/embed/QE5_AcfeJ7E',
+    videoUrl: 'https://youtube.com/embed/jrMK7StJakE',
     videoDimensions: [undefined, undefined],
     bundle: 'com.downbeat.polebalance',
     releaseDate: 'January 2021',
