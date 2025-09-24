@@ -141,6 +141,20 @@ export default [
     description:
       "Control the elements to solve problems and be a hero!<br/>As seen on GamesKeys: <a target='_blank' href='https://gameskeys.net/top-android-games-to-tryout-in-may-2021/'>Top Android Games to Try in May 2021<a/>",
   },
+    {
+    id: "space-factory",
+    title: "Space Factory WIP",
+    subtitle: "WIP",
+    bannerImg: "",
+    url: "/space-factory",
+    nScreens: "0",
+    videoUrl: "",
+    videoDimensions: [undefined, undefined],
+    bundle: "",
+    releaseDate: "TBD",
+    description:
+      "We're working on a new game, check back later!",
+  },
 ];
 
 export var comingSoonData = {
