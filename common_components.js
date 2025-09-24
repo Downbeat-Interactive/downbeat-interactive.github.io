@@ -67,7 +67,7 @@ var NavigationMenu = function (_React$Component) {
               null,
               React.createElement(
                 'a',
-                { target: '_blank', href: 'https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f' },
+                { target: '_blank', href: 'https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c' },
                 React.createElement('i', { 'class': 'fas fa-envelope' }),
                 '    Contact Us'
               )
@@ -79,7 +79,7 @@ var NavigationMenu = function (_React$Component) {
               React.createElement(
                 'a',
                 { target: '_blank',
-                  href: 'http://eepurl.com/hqpHjL'
+                  href: 'https://mailchi.mp/5a08e8f7d203/subscribe'
                 },
                 React.createElement('i', { 'class': 'fas fa-bullhorn' }),
                 '    Get our newsletter'
@@ -348,7 +348,7 @@ var Socials = function (_React$Component4) {
               'a',
               {
                 target: '_blank ',
-                href: 'https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f',
+                href: 'https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c',
                 className: 'icon fa-envelope '
               },
               React.createElement(

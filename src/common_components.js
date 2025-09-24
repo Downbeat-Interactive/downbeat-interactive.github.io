@@ -32,10 +32,10 @@ class NavigationMenu extends React.Component{
               <a href="/"><i class="fas fa-home"></i>    Home</a>
             </li>
               <GamesDropdown />
-            <li><a target = "_blank" href="https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f">
+            <li><a target = "_blank" href="https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c">
                 <i class="fas fa-envelope"></i>    Contact Us</a></li>
             <li> <a target="_blank"
-                        href="http://eepurl.com/hqpHjL"
+                        href="https://mailchi.mp/5a08e8f7d203/subscribe"
                       ><i class="fas fa-bullhorn"></i>    Get our newsletter</a></li>
           </ul>
         </nav>
@@ -186,7 +186,7 @@ class NavigationMenu extends React.Component{
                     <li key="item5">
                       <a
                         target="_blank "
-                        href="https://us2.list-manage.com/contact-form?u=6567dd34ecd4d4f21831b0826&form_id=89b3517fe84a4fe3f83c5ce30f6cef7f"
+                        href="https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c"
                         className="icon fa-envelope "
                       >
                         <span className="label ">Email</span>
