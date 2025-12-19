@@ -1,294 +1,173 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 import ErrorBoundary from './error_boundary.js';
 import { PrivacyLink, GamePageLink } from './common_components.js';
 import { GooglePlayScraper } from './utils.js';
-
-var FeatureStoreButton = function (_React$Component) {
-  _inherits(FeatureStoreButton, _React$Component);
-
-  function FeatureStoreButton(props) {
-    _classCallCheck(this, FeatureStoreButton);
-
-    var _this = _possibleConstructorReturn(this, (FeatureStoreButton.__proto__ || Object.getPrototypeOf(FeatureStoreButton)).call(this, props));
-
-    _this.props = props;
-    return _this;
+class FeatureStoreButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
   }
-
-  _createClass(FeatureStoreButton, [{
-    key: 'render',
-    value: function render() {
-      if (this.props.show == "true" && typeof this.props.bundle !== 'undefined' && this.props.bundle.length > 0) return React.createElement(
-        'a',
-        { target: '_blank', href: "https://play.google.com/store/apps/details?id=" + this.props.bundle },
-        React.createElement('img', { className: 'image-button', src: '/images/google-play-download.png', alt: 'See on Google Play' })
-      );else return React.createElement('div', null);
+  render() {
+    if (this.props.show == "true" && typeof this.props.bundle !== 'undefined' && this.props.bundle.length > 0) return /*#__PURE__*/React.createElement("a", {
+      target: "_blank",
+      href: "https://play.google.com/store/apps/details?id=" + this.props.bundle
+    }, /*#__PURE__*/React.createElement("img", {
+      className: "image-button",
+      src: "/images/google-play-download.png",
+      alt: "See on Google Play"
+    }));else return /*#__PURE__*/React.createElement("div", null);
+  }
+}
+class FeatureVideo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+  render() {
+    if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) {
+      return /*#__PURE__*/React.createElement(ErrorBoundary, {
+        showBack: false
+      }, /*#__PURE__*/React.createElement("div", {
+        id: this.props.id + "-video",
+        className: "iframe-container align-center feature-video"
+      }, /*#__PURE__*/React.createElement("iframe", {
+        className: "feature-iframe",
+        width: this.props.width,
+        height: this.props.height,
+        src: this.props.url,
+        frameBorder: "0",
+        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+        allowFullScreen: true
+      })));
+    } else return /*#__PURE__*/React.createElement("div", null);
+  }
+}
+class BoxFull extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+  render() {
+    return /*#__PURE__*/React.createElement("section", {
+      className: "wrapper style2"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "inner"
+    }, /*#__PURE__*/React.createElement("div", {
+      id: this.props.id,
+      "data-aos": "fade-right",
+      "data-aos-delay": "100",
+      className: "box align-center"
+    }, this.props.inner)));
+  }
+}
+class GameFeatureFull extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.data = props.data;
+  }
+  render() {
+    if (this.data.id != 'default' && this.data.id.length > 0) {
+      return /*#__PURE__*/React.createElement(ErrorBoundary, null, /*#__PURE__*/React.createElement(BoxFull, {
+        id: this.data.id,
+        inner: /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(FeatureVideo, {
+          url: this.data.videoUrl,
+          id: this.data.id
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "content"
+        }, /*#__PURE__*/React.createElement("header", {
+          className: "align-center",
+          "data-aos": "slide-left",
+          "data-aos-duration": "400"
+        }, /*#__PURE__*/React.createElement("p", null, this.data.subtitle), /*#__PURE__*/React.createElement("a", {
+          className: "no-decoration",
+          href: this.data.url
+        }, /*#__PURE__*/React.createElement("h2", {
+          className: "feature-title"
+        }, this.data.title))), /*#__PURE__*/React.createElement("div", {
+          className: "align-center feature-content",
+          "data-aos": "fade-up"
+        }, /*#__PURE__*/React.createElement("div", {
+          dangerouslySetInnerHTML: {
+            __html: this.data.description,
+            sanitize: true
+          }
+        }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(GamePageLink, {
+          url: this.data.url
+        })), /*#__PURE__*/React.createElement("footer", {
+          className: "align-center",
+          "data-aos": "zoom-in"
+        }, /*#__PURE__*/React.createElement(FeatureStoreButton, {
+          show: this.props.showPlayStoreButton,
+          bundle: this.data.bundle
+        })), /*#__PURE__*/React.createElement(PrivacyLink, {
+          url: this.data.url,
+          show: this.props.showPrivacyURL
+        }), /*#__PURE__*/React.createElement(ReleaseDate, {
+          date: this.data.releaseDate
+        })))
+      }));
+    } else {
+      return null;
     }
-  }]);
-
-  return FeatureStoreButton;
-}(React.Component);
-
-var FeatureVideo = function (_React$Component2) {
-  _inherits(FeatureVideo, _React$Component2);
-
-  function FeatureVideo(props) {
-    _classCallCheck(this, FeatureVideo);
-
-    var _this2 = _possibleConstructorReturn(this, (FeatureVideo.__proto__ || Object.getPrototypeOf(FeatureVideo)).call(this, props));
-
-    _this2.props = props;
-    return _this2;
   }
-
-  _createClass(FeatureVideo, [{
-    key: 'render',
-    value: function render() {
-      if (typeof this.props.url !== 'undefined' && this.props.url.length > 0) {
-        return React.createElement(
-          ErrorBoundary,
-          { showBack: false },
-          React.createElement(
-            'div',
-            { id: this.props.id + "-video", className: 'iframe-container align-center feature-video' },
-            React.createElement('iframe', { className: 'feature-iframe',
-              width: this.props.width,
-              height: this.props.height,
-              src: this.props.url,
-              frameBorder: '0',
-              allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
-              allowFullScreen: true
-            })
-          )
-        );
-      } else return React.createElement('div', null);
-    }
-  }]);
-
-  return FeatureVideo;
-}(React.Component);
-
-var BoxFull = function (_React$Component3) {
-  _inherits(BoxFull, _React$Component3);
-
-  function BoxFull(props) {
-    _classCallCheck(this, BoxFull);
-
-    var _this3 = _possibleConstructorReturn(this, (BoxFull.__proto__ || Object.getPrototypeOf(BoxFull)).call(this, props));
-
-    _this3.props = props;
-    return _this3;
+}
+class ReleaseDate extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.date = this.props.date;
   }
-
-  _createClass(BoxFull, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'section',
-        { className: 'wrapper style2' },
-        React.createElement(
-          'div',
-          { className: 'inner' },
-          React.createElement(
-            'div',
-            { id: this.props.id, 'data-aos': 'fade-right', 'data-aos-delay': '100', className: 'box align-center' },
-            this.props.inner
-          )
-        )
-      );
-    }
-  }]);
-
-  return BoxFull;
-}(React.Component);
-
-var GameFeatureFull = function (_React$Component4) {
-  _inherits(GameFeatureFull, _React$Component4);
-
-  function GameFeatureFull(props) {
-    _classCallCheck(this, GameFeatureFull);
-
-    var _this4 = _possibleConstructorReturn(this, (GameFeatureFull.__proto__ || Object.getPrototypeOf(GameFeatureFull)).call(this, props));
-
-    _this4.props = props;
-    _this4.data = props.data;
-    return _this4;
+  render() {
+    if (this.date !== undefined && this.date.length > 0 && this.date != "") {
+      return /*#__PURE__*/React.createElement("div", {
+        "data-aos": "flip-up",
+        "data-aos-delay": "100",
+        className: "align-center release-date"
+      }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("i", null, "Released ", this.date)));
+    } else return null;
   }
-
-  _createClass(GameFeatureFull, [{
-    key: 'render',
-    value: function render() {
-      if (this.data.id != 'default' && this.data.id.length > 0) {
-        return React.createElement(
-          ErrorBoundary,
-          null,
-          React.createElement(BoxFull, { id: this.data.id, inner: React.createElement(
-              'div',
-              null,
-              React.createElement(FeatureVideo, { url: this.data.videoUrl, id: this.data.id }),
-              React.createElement(
-                'div',
-                { className: 'content' },
-                React.createElement(
-                  'header',
-                  { className: 'align-center', 'data-aos': 'slide-left', 'data-aos-duration': '400' },
-                  React.createElement(
-                    'p',
-                    null,
-                    this.data.subtitle
-                  ),
-                  React.createElement(
-                    'a',
-                    { className: 'no-decoration', href: this.data.url },
-                    React.createElement(
-                      'h2',
-                      { className: 'feature-title' },
-                      this.data.title
-                    )
-                  )
-                ),
-                React.createElement(
-                  'div',
-                  { className: 'align-center feature-content', 'data-aos': 'fade-up' },
-                  React.createElement('div', { dangerouslySetInnerHTML: { __html: this.data.description, sanitize: true } }),
-                  React.createElement('br', null),
-                  React.createElement(GamePageLink, { url: this.data.url })
-                ),
-                React.createElement(
-                  'footer',
-                  { className: 'align-center', 'data-aos': 'zoom-in' },
-                  React.createElement(FeatureStoreButton, { show: this.props.showPlayStoreButton, bundle: this.data.bundle })
-                ),
-                React.createElement(PrivacyLink, { url: this.data.url, show: this.props.showPrivacyURL }),
-                React.createElement(ReleaseDate, { date: this.data.releaseDate })
-              )
-            ) })
-        );
-      } else {
-        return null;
+}
+class GameFeatureScreenshots extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.data = props.data;
+  }
+  render() {
+    if (this.data.nScreens > 0) {
+      var output = [];
+      output.push();
+      for (var i = 0; i < this.data.nScreens; i++) {
+        output.push(/*#__PURE__*/React.createElement("a", null, /*#__PURE__*/React.createElement("img", {
+          className: "game-screenshot",
+          src: this.props.data.url + "/screens/" + i.toString() + ".png"
+        })));
       }
-    }
-  }]);
-
-  return GameFeatureFull;
-}(React.Component);
-
-var ReleaseDate = function (_React$Component5) {
-  _inherits(ReleaseDate, _React$Component5);
-
-  function ReleaseDate(props) {
-    _classCallCheck(this, ReleaseDate);
-
-    var _this5 = _possibleConstructorReturn(this, (ReleaseDate.__proto__ || Object.getPrototypeOf(ReleaseDate)).call(this, props));
-
-    _this5.props = props;
-    _this5.date = _this5.props.date;
-    return _this5;
+      return /*#__PURE__*/React.createElement(BoxFull, {
+        id: this.props.data.id,
+        inner: /*#__PURE__*/React.createElement("div", {
+          className: "content"
+        }, /*#__PURE__*/React.createElement("header", {
+          className: "align-center",
+          "data-aos": "slide-left",
+          "data-aos-mirror": "false",
+          "data-aos-duration": "400"
+        }, /*#__PURE__*/React.createElement("p", null, this.props.data.title), /*#__PURE__*/React.createElement("a", {
+          className: "no-decoration"
+        }, /*#__PURE__*/React.createElement("h2", {
+          className: "feature-title"
+        }, "Screenshots"))), /*#__PURE__*/React.createElement("div", {
+          className: "align-center feature-content"
+        }, /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement("div", {
+          className: "screenshots-container",
+          "data-aos": "flip-left",
+          "data-aos-duration": "500"
+        }, output), /*#__PURE__*/React.createElement("div", null))
+      });
+    } else return null;
   }
-
-  _createClass(ReleaseDate, [{
-    key: 'render',
-    value: function render() {
-      if (this.date !== undefined && this.date.length > 0 && this.date != "") {
-        return React.createElement(
-          'div',
-          { 'data-aos': 'flip-up', 'data-aos-delay': '100', className: 'align-center release-date' },
-          React.createElement(
-            'p',
-            null,
-            React.createElement(
-              'i',
-              null,
-              'Released ',
-              this.date
-            )
-          )
-        );
-      } else return null;
-    }
-  }]);
-
-  return ReleaseDate;
-}(React.Component);
-
-var GameFeatureScreenshots = function (_React$Component6) {
-  _inherits(GameFeatureScreenshots, _React$Component6);
-
-  function GameFeatureScreenshots(props) {
-    _classCallCheck(this, GameFeatureScreenshots);
-
-    var _this6 = _possibleConstructorReturn(this, (GameFeatureScreenshots.__proto__ || Object.getPrototypeOf(GameFeatureScreenshots)).call(this, props));
-
-    _this6.props = props;
-    _this6.data = props.data;
-    return _this6;
-  }
-
-  _createClass(GameFeatureScreenshots, [{
-    key: 'render',
-    value: function render() {
-      if (this.data.nScreens > 0) {
-        var output = [];
-
-        output.push();
-        for (var i = 0; i < this.data.nScreens; i++) {
-          output.push(React.createElement(
-            'a',
-            null,
-            React.createElement('img', { className: 'game-screenshot', src: this.props.data.url + "/screens/" + i.toString() + ".png" })
-          ));
-        }
-
-        return React.createElement(BoxFull, { id: this.props.data.id, inner: React.createElement(
-            'div',
-            { className: 'content' },
-            React.createElement(
-              'header',
-              { className: 'align-center', 'data-aos': 'slide-left', 'data-aos-mirror': 'false', 'data-aos-duration': '400' },
-              React.createElement(
-                'p',
-                null,
-                this.props.data.title
-              ),
-              React.createElement(
-                'a',
-                { className: 'no-decoration' },
-                React.createElement(
-                  'h2',
-                  { className: 'feature-title' },
-                  'Screenshots'
-                )
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'align-center feature-content' },
-              React.createElement('br', null)
-            ),
-            React.createElement(
-              'div',
-              { className: 'screenshots-container', 'data-aos': 'flip-left', 'data-aos-duration': '500' },
-              output
-            ),
-            React.createElement('div', null)
-          )
-
-        });
-      } else return null;
-    }
-  }]);
-
-  return GameFeatureScreenshots;
-}(React.Component);
-
+}
 export default GameFeatureFull;
 export { GameFeatureFull, GameFeatureScreenshots };

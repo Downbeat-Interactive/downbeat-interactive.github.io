@@ -137,9 +137,6 @@ Each game has its own dedicated page featuring:
 ### Analytics
 Google Analytics 
 
-### Email Integration
-MailChimp is integrated for newsletter subscriptions
-
 ### Favicons
 Multiple favicon sizes and formats are included for cross-platform compatibility
 

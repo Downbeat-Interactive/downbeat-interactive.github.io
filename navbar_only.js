@@ -1,11 +1,7 @@
 'use strict';
 
 import { NavigationMenu, Header } from "./common_components.js";
-
-var domContainer = document.querySelector('#app_container');
-ReactDOM.render(React.createElement(
-   'div',
-   null,
-   React.createElement(Header, null),
-   React.createElement(NavigationMenu, { dandy: 'true' })
-), domContainer);
+let domContainer = document.querySelector('#app_container');
+ReactDOM.render(/*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(NavigationMenu, {
+  dandy: "true"
+})), domContainer);

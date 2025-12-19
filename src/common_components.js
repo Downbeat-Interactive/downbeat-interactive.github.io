@@ -1,6 +1,6 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
-import data from './game_data.js'
+import data from './mobile_game_data.js'
 
 class NavigationMenu extends React.Component{
     constructor(props){
@@ -30,6 +30,9 @@ class NavigationMenu extends React.Component{
           <ul className="links">
             <li key="home">
               <a href="/"><i class="fas fa-home"></i>    Home</a>
+            </li>
+            <li key="about">
+              <a href="/about/"><i class="fas fa-info-circle"></i>    About Us</a>
             </li>
               <GamesDropdown />
             <li><a target = "_blank" href="https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c">

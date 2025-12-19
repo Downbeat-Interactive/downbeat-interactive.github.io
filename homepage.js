@@ -10,7 +10,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import { GameFeatureFull, GameFeatureScreenshots } from './game_features.js';
 import ErrorBoundary from './error_boundary.js';
-import data from './game_data.js';
+import mobile_data from './mobile_game_data.js';
+import game_data from './game_data.js';
 import { Header, Footer, NavigationMenu } from './common_components.js';
 
 var domContainer = document.querySelector('#app_container');
@@ -50,23 +51,7 @@ var HomePageBanner = function (_React$Component) {
           mp4: 'images/intro.mp4',
           title: 'Welcome',
           subtitle: '',
-          link: '' }),
-        React.createElement(HomePageBannerArticle, {
-          poster: 'images/dandy-tiny.jpg',
-          webm: 'images/dandy-short.webm',
-          mp4: 'images/dandy-short.mp4',
-          title: 'Dandy Drift',
-          subtitle: 'Our Games',
-          link: 'dandy-drift'
-        }),
-        React.createElement(HomePageBannerArticle, {
-          poster: 'images/dance-background.jpg'
-          // webm="images/dance-background.webm" 
-          , mp4: 'images/dance-background.mp4',
-          title: 'Tactics Rush',
-          subtitle: 'Our Games',
-          link: 'tactics-rush'
-        })
+          link: '' })
       );
 
       return output;
@@ -166,37 +151,91 @@ var HomePageBannerArticle = function (_React$Component2) {
   return HomePageBannerArticle;
 }(React.Component);
 
-var HomePageFeatures = function (_React$Component3) {
-  _inherits(HomePageFeatures, _React$Component3);
+var HomePageMobileFeatures = function (_React$Component3) {
+  _inherits(HomePageMobileFeatures, _React$Component3);
 
-  function HomePageFeatures() {
-    _classCallCheck(this, HomePageFeatures);
+  function HomePageMobileFeatures() {
+    _classCallCheck(this, HomePageMobileFeatures);
 
-    return _possibleConstructorReturn(this, (HomePageFeatures.__proto__ || Object.getPrototypeOf(HomePageFeatures)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (HomePageMobileFeatures.__proto__ || Object.getPrototypeOf(HomePageMobileFeatures)).apply(this, arguments));
   }
 
-  _createClass(HomePageFeatures, [{
+  _createClass(HomePageMobileFeatures, [{
     key: 'render',
     value: function render() {
       return React.createElement(
-        ErrorBoundary,
-        { showBack: true },
-        data.map(function (game) {
-          return React.createElement(GameFeatureFull, {
-            data: game,
-            showPlayStoreButton: 'false',
-            showPrivacyURL: 'false'
-          });
-        })
+        'div',
+        null,
+        React.createElement(
+          'section',
+          { className: 'wrapper style3 align-center' },
+          React.createElement(
+            'div',
+            { className: 'inner' },
+            React.createElement(
+              'header',
+              { className: 'align-center' },
+              React.createElement(
+                'h2',
+                null,
+                'Mobile Games'
+              )
+            )
+          )
+        ),
+        React.createElement(
+          ErrorBoundary,
+          { showBack: true },
+          mobile_data.map(function (game) {
+            return React.createElement(GameFeatureFull, {
+              data: game,
+              showPlayStoreButton: 'false',
+              showPrivacyURL: 'false'
+            });
+          })
+        )
       );
     }
   }]);
 
-  return HomePageFeatures;
+  return HomePageMobileFeatures;
 }(React.Component);
 
-var HomePage = function (_React$Component4) {
-  _inherits(HomePage, _React$Component4);
+var HomePageFeatureGame = function (_React$Component4) {
+  _inherits(HomePageFeatureGame, _React$Component4);
+
+  function HomePageFeatureGame() {
+    _classCallCheck(this, HomePageFeatureGame);
+
+    return _possibleConstructorReturn(this, (HomePageFeatureGame.__proto__ || Object.getPrototypeOf(HomePageFeatureGame)).apply(this, arguments));
+  }
+
+  _createClass(HomePageFeatureGame, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          ErrorBoundary,
+          { showBack: true },
+          game_data.map(function (game) {
+            return React.createElement(GameFeatureFull, {
+              data: game,
+              showPlayStoreButton: 'false',
+              showPrivacyURL: 'false'
+            });
+          })
+        )
+      );
+    }
+  }]);
+
+  return HomePageFeatureGame;
+}(React.Component);
+
+var HomePage = function (_React$Component5) {
+  _inherits(HomePage, _React$Component5);
 
   function HomePage() {
     _classCallCheck(this, HomePage);
@@ -211,9 +250,10 @@ var HomePage = function (_React$Component4) {
         'div',
         null,
         React.createElement(Header, null),
-        React.createElement(NavigationMenu, { data: data }),
+        React.createElement(NavigationMenu, { data: game_data }),
         React.createElement(HomePageBanner, null),
-        React.createElement(HomePageFeatures, null),
+        React.createElement(HomePageFeatureGame, null),
+        React.createElement(HomePageMobileFeatures, null),
         React.createElement(Footer, null)
       );
     }

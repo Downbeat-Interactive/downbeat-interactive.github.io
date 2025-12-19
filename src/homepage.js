@@ -1,7 +1,8 @@
 'use strict';
 import {GameFeatureFull, GameFeatureScreenshots} from './game_features.js';
 import ErrorBoundary from './error_boundary.js';
-import data from './game_data.js'
+import mobile_data from './mobile_game_data.js'
+import game_data from './game_data.js'
 import {Header, Footer, NavigationMenu} from './common_components.js'
 
 let domContainer = document.querySelector('#app_container');
@@ -32,7 +33,7 @@ class HomePageBanner extends React.Component{
         title="Welcome"
         subtitle=""
         link="" />
-      <HomePageBannerArticle 
+      {/* <HomePageBannerArticle 
         poster="images/dandy-tiny.jpg" 
         webm="images/dandy-short.webm" 
         mp4="images/dandy-short.mp4"
@@ -47,7 +48,7 @@ class HomePageBanner extends React.Component{
         title="Tactics Rush"
         subtitle="Our Games" 
         link="tactics-rush"
-        />
+        /> */}
       </section>
    
  )
@@ -113,29 +114,64 @@ class HomePageBannerArticle extends React.Component{
 }
 
 
-class HomePageFeatures extends React.Component{
+class HomePageMobileFeatures extends React.Component{
   render(){
-    return <ErrorBoundary showBack={true}>
-    {data.map(game => (
-      <GameFeatureFull
-        data={game} 
-        showPlayStoreButton = "false"
-        showPrivacyURL = "false"
-        />
-    ))}
-    </ErrorBoundary>
+    return (
+      <div>
+        <section className="wrapper style3 align-center">
+          <div className="inner">
+            <header className="align-center">
+              <h2>Mobile Games</h2>
+            </header>
+          </div>
+        </section>
+
+        <ErrorBoundary showBack={true}>
+          {mobile_data.map(game => (
+            <GameFeatureFull
+              data={game} 
+              showPlayStoreButton = "false"
+              showPrivacyURL = "false"
+              />
+          ))}
+        </ErrorBoundary>
+      </div>
+    );
   }
 
 }
+
+
+class HomePageFeatureGame extends React.Component{
+  render(){
+    return (
+      <div>
+
+        <ErrorBoundary showBack={true}>
+          {game_data.map(game => (
+            <GameFeatureFull
+              data={game} 
+              showPlayStoreButton = "false"
+              showPrivacyURL = "false"
+              />
+          ))}
+        </ErrorBoundary>
+      </div>
+    );
+  }
+
+}
+
 
 class HomePage extends React.Component{
   render(){
     return (
       <div>
           <Header/>
-          <NavigationMenu data={data}/>
+          <NavigationMenu data={game_data}/>
           <HomePageBanner />
-          <HomePageFeatures/>
+          <HomePageFeatureGame/>
+          <HomePageMobileFeatures/>
           <Footer/>
       </div>
     );
