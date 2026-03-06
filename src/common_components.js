@@ -1,6 +1,6 @@
 'use strict';
 import ErrorBoundary from './error_boundary.js';
-import data from './mobile_game_data.js'
+import mobileData from './mobile_game_data.js'
 
 class NavigationMenu extends React.Component{
     constructor(props){
@@ -34,7 +34,7 @@ class NavigationMenu extends React.Component{
             <li key="about">
               <a href="/about/"><i class="fas fa-info-circle"></i>    About Us</a>
             </li>
-              <GamesDropdown />
+              <GamesDropdown data={this.props.data}/>
             <li><a target = "_blank" href="https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c">
                 <i class="fas fa-envelope"></i>    Contact Us</a></li>
             <li> <a target="_blank"
@@ -101,10 +101,15 @@ class NavigationMenu extends React.Component{
 
   }
     render(){
+          const pageData = Array.isArray(this.props.data) ? this.props.data : [];
+          const games = [...mobileData, ...pageData].filter((game, index, array) => (
+            game.title.length>0 && array.findIndex(item => item.id == game.id) == index
+          ));
+
           return <li id= "games-li" className="game-list" key = "games">
             <a> <i class="fas fa-gamepad"></i>    Games   <i id="games-dropdown" class="fas fa-chevron-down"></i></a>
                 <ul id="game-list" className="links align-right hide">
-                    {data.filter(game=>game.title.length>0).map(game => (
+                    {games.map(game => (
                       <li className="game-list-item hide"key={game.id} title={game.title}>
                         <a href ={game.url}>{game.title}</a>
                       </li>
