@@ -1,7 +1,7 @@
 'use strict';
 
 import ErrorBoundary from './error_boundary.js';
-import data from './mobile_game_data.js';
+import mobileData from './mobile_game_data.js';
 class NavigationMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +38,9 @@ class NavigationMenu extends React.Component {
       href: "/about/"
     }, /*#__PURE__*/React.createElement("i", {
       class: "fas fa-info-circle"
-    }), "    About Us")), /*#__PURE__*/React.createElement(GamesDropdown, null), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    }), "    About Us")), /*#__PURE__*/React.createElement(GamesDropdown, {
+      data: this.props.data
+    }), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
       target: "_blank",
       href: "https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c"
     }, /*#__PURE__*/React.createElement("i", {
@@ -96,6 +98,8 @@ class GamesDropdown extends React.Component {
     document.getElementById("games-li").addEventListener("click", this.clickExpandGames);
   }
   render() {
+    const pageData = Array.isArray(this.props.data) ? this.props.data : [];
+    const games = [...mobileData, ...pageData].filter((game, index, array) => game.title.length > 0 && array.findIndex(item => item.id == game.id) == index);
     return /*#__PURE__*/React.createElement("li", {
       id: "games-li",
       className: "game-list",
@@ -108,7 +112,7 @@ class GamesDropdown extends React.Component {
     })), /*#__PURE__*/React.createElement("ul", {
       id: "game-list",
       className: "links align-right hide"
-    }, data.filter(game => game.title.length > 0).map(game => /*#__PURE__*/React.createElement("li", {
+    }, games.map(game => /*#__PURE__*/React.createElement("li", {
       className: "game-list-item hide",
       key: game.id,
       title: game.title

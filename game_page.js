@@ -32,7 +32,9 @@ class GamePage extends React.Component {
       document.title = game.title + " | Downbeat Games";
       return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
         fixed: "true"
-      }), /*#__PURE__*/React.createElement(NavigationMenu, null), /*#__PURE__*/React.createElement("section", {
+      }), /*#__PURE__*/React.createElement(NavigationMenu, {
+        data: data
+      }), /*#__PURE__*/React.createElement("section", {
         className: "wrapper style3 align-center"
       }, /*#__PURE__*/React.createElement("div", {
         className: "game-page-feature-container"
@@ -45,7 +47,9 @@ class GamePage extends React.Component {
       }))), /*#__PURE__*/React.createElement(Footer, null));
     } else return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
       fixed: "true"
-    }), /*#__PURE__*/React.createElement(NavigationMenu, null), /*#__PURE__*/React.createElement(Content, {
+    }), /*#__PURE__*/React.createElement(NavigationMenu, {
+      data: data
+    }), /*#__PURE__*/React.createElement(Content, {
       html: this.props.html
     }), /*#__PURE__*/React.createElement(Footer, null));
   }

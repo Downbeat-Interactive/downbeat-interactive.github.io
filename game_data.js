@@ -12,6 +12,24 @@ export default [{
   videoDimensions: [undefined, undefined],
   description: ''
 }, {
+  id: 'scoundrel',
+  title: 'Scoundrel Cards',
+  subtitle: 'Playable Web Card Game',
+  bannerImg: '',
+  url: '/games/scoundrel',
+  nScreens: 0,
+  videoUrl: '',
+  videoDimensions: [undefined, undefined],
+  releaseDate: '',
+  description: '<div class="feature-list">\
+                            Scoundrel Cards is now playable in your browser.<br/><br/>\
+                            <ul className="align-left">\
+                                <li key="item0">Battle through a dungeon using a deck of cards</li>\
+                                <li key="item1">Play instantly in your browser</li>\
+                                <li key="item2"><a href="/scoundrel/">Launch Scoundrel Cards</a></li>\
+                            </ul> \
+                        </div>'
+}, {
   id: 'space-factory',
   title: 'Space Factory',
   subtitle: 'Factory... In Space',
