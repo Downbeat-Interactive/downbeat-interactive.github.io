@@ -12,21 +12,22 @@ export default [{
   videoDimensions: [undefined, undefined],
   description: ''
 }, {
-  id: 'deal-in-the-dark',
-  title: 'Deal in the Dark',
+  id: 'tali',
+  title: 'Tali',
   subtitle: 'Playable Web Card Game',
   bannerImg: '',
-  url: '/games/deal-in-the-dark',
+  url: '/games/tali',
   nScreens: 0,
   videoUrl: '',
   videoDimensions: [undefined, undefined],
   releaseDate: '',
   description: '<div class="feature-list">\
-                            Deal in the Dark is now playable in your browser.<br/>It works best on Chrome.<br/><br/>\
+                            Tali is now playable in your browser.<br/>It works best on Chrome.<br/><br/>\
                             <ul className="align-left">\
                                 <li key="item0">Battle through a dungeon using a deck of cards</li>\
                                 <li key="item1">Play instantly in your browser</li>\
-                                <li key="item2"><a href="/deal-in-the-dark/">Launch Deal in the Dark</a></li>\
+                  <li key="item2"><a href="/tali/">Launch Tali</a></li>\
+                  <li key="item3"><a href="/tali/tali-windows.zip">Download the Windows build (.zip)</a></li>\
                             </ul> \
                         </div>'
 }, {
