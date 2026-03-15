@@ -1,294 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>TALI</title>
-		<style>
-html, body, #canvas {
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tali</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --page-bg: #071012;
+        --panel-bg: rgba(8, 19, 21, 0.86);
+        --panel-border: rgba(110, 255, 219, 0.22);
+        --text-main: #f1fbf8;
+        --text-muted: rgba(241, 251, 248, 0.74);
+        --accent: #56f3cb;
+        --accent-strong: #1bb18d;
+      }
 
-html, body {
-	width: 100%;
-	height: 100%;
-}
+      * {
+        box-sizing: border-box;
+      }
 
-body {
-	color: white;
-	background:
-		radial-gradient(circle at top, rgba(34, 76, 72, 0.72), rgba(6, 10, 12, 0.98) 58%),
-		#040607;
-		overflow: hidden;
-	touch-action: none;
-		font-family: Inter, "Segoe UI", Arial, sans-serif;
-}
+      html, body {
+        margin: 0;
+        min-height: 100%;
+      }
 
-#canvas {
-	display: block;
-	width: 100%;
-	height: 100%;
-}
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 20px;
+        background:
+          radial-gradient(circle at top, rgba(46, 116, 103, 0.45), transparent 42%),
+          linear-gradient(180deg, #0b1719 0%, var(--page-bg) 100%);
+        color: var(--text-main);
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
 
-#canvas:focus {
-	outline: none;
-}
+      .page {
+        width: min(960px, 100%);
+      }
 
-#overlay {
-	position: fixed;
-	inset: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 24px;
-	background: rgba(4, 7, 8, 0.84);
-	backdrop-filter: blur(10px);
-	z-index: 10;
-}
+      .card {
+        overflow: hidden;
+        border: 1px solid var(--panel-border);
+        border-radius: 28px;
+        background: var(--panel-bg);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+        backdrop-filter: blur(10px);
+      }
 
-#panel {
-	width: min(440px, 100%);
-	padding: 28px 24px;
-	border: 1px solid rgba(173, 255, 238, 0.18);
-	border-radius: 20px;
-	background: linear-gradient(180deg, rgba(18, 28, 30, 0.96), rgba(9, 14, 16, 0.96));
-	box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
-	text-align: center;
-}
+      .banner {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
 
-#splash {
-	max-width: min(256px, 70vw);
-	max-height: 192px;
-	margin-bottom: 18px;
-}
+      .content {
+        padding: 28px;
+      }
 
-#title {
-	margin: 0 0 10px;
-	font-size: 28px;
-	letter-spacing: 0.04em;
-}
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 4vw, 3rem);
+        letter-spacing: 0.04em;
+      }
 
-#subtitle {
-	margin: 0 0 20px;
-	color: rgba(232, 244, 241, 0.82);
-	font-size: 15px;
-	line-height: 1.45;
-}
+      p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
 
-#actions {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-}
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 24px;
+      }
 
-#start-button {
-	width: 100%;
-	padding: 14px 16px;
-	border: none;
-	border-radius: 999px;
-	background: linear-gradient(180deg, #56f3cb, #25b993);
-	color: #052018;
-	font-size: 16px;
-	font-weight: 700;
-	cursor: pointer;
-	transition: transform 120ms ease, filter 120ms ease, opacity 120ms ease;
-}
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 999px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 120ms ease, filter 120ms ease, background 120ms ease;
+      }
 
-#start-button:hover,
-#start-button:focus-visible {
-	transform: translateY(-1px);
-	filter: brightness(1.04);
-}
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-1px);
+        filter: brightness(1.04);
+      }
 
-#start-button[disabled] {
-	cursor: wait;
-	opacity: 0.7;
-	transform: none;
-}
+      .button-primary {
+        background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+        color: #06211a;
+      }
 
-#download-button {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	padding: 13px 16px;
-	border: 1px solid rgba(86, 243, 203, 0.35);
-	border-radius: 999px;
-	background: rgba(8, 18, 19, 0.72);
-	color: rgba(232, 244, 241, 0.96);
-	font-size: 15px;
-	font-weight: 600;
-	text-decoration: none;
-	transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
-}
+      .button-secondary {
+        border: 1px solid rgba(110, 255, 219, 0.28);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text-main);
+      }
 
-#download-button:hover,
-#download-button:focus-visible {
-	transform: translateY(-1px);
-	background: rgba(12, 26, 28, 0.92);
-	border-color: rgba(86, 243, 203, 0.6);
-}
+      .note {
+        margin-top: 16px;
+        font-size: 0.95rem;
+      }
 
-#download-note {
-	margin: -2px 0 0;
-	color: rgba(232, 244, 241, 0.62);
-	font-size: 13px;
-	line-height: 1.4;
-}
+      @media (max-width: 640px) {
+        .content {
+          padding: 22px;
+        }
 
-#progress {
-	width: 100%;
-	height: 10px;
-	margin-top: 16px;
-	accent-color: #56f3cb;
-	display: none;
-}
+        .actions {
+          flex-direction: column;
+        }
 
-#status {
-	margin-top: 14px;
-	min-height: 1.4em;
-	color: rgba(232, 244, 241, 0.78);
-	font-size: 14px;
-	line-height: 1.4;
-	white-space: pre-wrap;
-}
-
-.hidden {
-	display: none !important;
-}
-		</style>
-		
-	</head>
-	<body>
-		<canvas id="canvas">
-			Your browser does not support the canvas tag.
-		</canvas>
-
-		<noscript>
-			Your browser does not support JavaScript.
-		</noscript>
-
-		<div id="overlay">
-			<div id="panel">
-				<img id="splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
-				<h1 id="title">TALI</h1>
-				<p id="subtitle">Tap or click to start in your browser, or download the Windows build as a zip.</p>
-				<div id="actions">
-					<button id="start-button" type="button">Start</button>
-					<a id="download-button" href="tali-windows.zip" download="tali-windows.zip">Download Windows build (.zip)</a>
-				</div>
-				<p id="download-note">Includes tali.exe and tali.pck.</p>
-				<progress id="progress"></progress>
-				<div id="status">Ready.</div>
-			</div>
-		</div>
-
-		<script src="index.js"></script>
-		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":85021360,"index.wasm":38057390},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
-const overlay = document.getElementById("overlay");
-const startButton = document.getElementById("start-button");
-const progressBar = document.getElementById("progress");
-const status = document.getElementById("status");
-const trackedAudioContexts = [];
-let isStarting = false;
-let engine = null;
-
-const NativeAudioContext = window.AudioContext || window.webkitAudioContext;
-
-if (NativeAudioContext) {
-	function TrackingAudioContext() {
-		const context = new NativeAudioContext(...arguments);
-		trackedAudioContexts.push(context);
-		return context;
-	}
-
-	TrackingAudioContext.prototype = NativeAudioContext.prototype;
-	window.AudioContext = TrackingAudioContext;
-	if (window.webkitAudioContext) {
-		window.webkitAudioContext = TrackingAudioContext;
-	}
-}
-
-function setStatus(text) {
-	status.textContent = text;
-}
-
-function showFailureNotice(err) {
-	console.error(err);
-	startButton.disabled = false;
-	isStarting = false;
-	progressBar.classList.add("hidden");
-	const message = err instanceof Error ? err.message : String(err);
-	setStatus(message || "An unknown error occurred while starting the game.");
-}
-
-function resumeTrackedAudioContexts() {
-	if (trackedAudioContexts.length === 0) {
-		return Promise.resolve();
-	}
-
-	return Promise.allSettled(trackedAudioContexts.map(function(context) {
-		if (!context || typeof context.resume !== "function") {
-			return Promise.resolve();
-		}
-		if (context.state === "running") {
-			return Promise.resolve();
-		}
-		return context.resume();
-	}));
-}
-
-function startGameFromUserGesture() {
-	if (isStarting) {
-		return;
-	}
-	isStarting = true;
-	startButton.disabled = true;
-	progressBar.classList.remove("hidden");
-	progressBar.style.display = "block";
-	setStatus("Loading...");
-	if (engine == null) {
-		engine = new Engine(GODOT_CONFIG);
-	}
-
-	resumeTrackedAudioContexts().then(function() {
-		return engine.startGame({
-		canvas: document.getElementById("canvas"),
-		onProgress: function(current, total) {
-			if (current > 0 && total > 0) {
-				progressBar.value = current;
-				progressBar.max = total;
-				setStatus("Loading... " + Math.round((current / total) * 100) + "%");
-			} else {
-				progressBar.removeAttribute("value");
-				progressBar.removeAttribute("max");
-				setStatus("Loading...");
-			}
-		},
-		});
-	}).then(function() {
-		return resumeTrackedAudioContexts();
-	}).then(function() {
-		overlay.remove();
-	}).catch(showFailureNotice);
-}
-
-startButton.addEventListener("click", startGameFromUserGesture);
-startButton.addEventListener("touchend", function(event) {
-	if (event.cancelable) {
-		event.preventDefault();
-	}
-	startGameFromUserGesture();
-}, { passive: false });
-window.addEventListener("keydown", function(event) {
-	if (event.key === "Enter" || event.key === " ") {
-		startGameFromUserGesture();
-	}
-});
-		</script>
-	</body>
+        .button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="card">
+        <img class="banner" src="banner.png" alt="Tali banner">
+        <div class="content">
+          <h1>Tali</h1>
+          <p>Tali is available as a Windows download. The zip includes tali.exe and tali.pck.</p>
+          <div class="actions">
+            <a class="button button-primary" href="https://download-tali-downbeat.s3.us-east-1.amazonaws.com/tali-windows.zip" download="tali-windows.zip">Download Windows build (.zip)</a>
+            <a class="button button-secondary" href="/games/tali">View game details</a>
+          </div>
+          <p class="note">The browser-based Godot player has been removed from this page.</p>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
 

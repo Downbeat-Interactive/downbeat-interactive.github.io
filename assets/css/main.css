@@ -89,6 +89,19 @@
    
 }
 
+.feature-banner {
+    margin: 0 auto 2rem auto;
+    max-width: 960px;
+}
+
+.feature-banner-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.18);
+}
+
 .game-screenshot{
     width:20vw;
     margin: 3vw;

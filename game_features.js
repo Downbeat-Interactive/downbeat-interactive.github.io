@@ -43,6 +43,26 @@ class FeatureVideo extends React.Component {
     } else return /*#__PURE__*/React.createElement("div", null);
   }
 }
+class FeatureBanner extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+  render() {
+    if (typeof this.props.src !== 'undefined' && this.props.src.length > 0) {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "feature-banner",
+        "data-aos": "zoom-in",
+        "data-aos-duration": "400"
+      }, /*#__PURE__*/React.createElement("img", {
+        className: "feature-banner-image",
+        src: this.props.src,
+        alt: this.props.alt
+      }));
+    }
+    return null;
+  }
+}
 class BoxFull extends React.Component {
   constructor(props) {
     super(props);
@@ -71,7 +91,10 @@ class GameFeatureFull extends React.Component {
     if (this.data.id != 'default' && this.data.id.length > 0) {
       return /*#__PURE__*/React.createElement(ErrorBoundary, null, /*#__PURE__*/React.createElement(BoxFull, {
         id: this.data.id,
-        inner: /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(FeatureVideo, {
+        inner: /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(FeatureBanner, {
+          src: this.data.bannerImg,
+          alt: this.data.title + " banner"
+        }), /*#__PURE__*/React.createElement(FeatureVideo, {
           url: this.data.videoUrl,
           id: this.data.id
         }), /*#__PURE__*/React.createElement("div", {

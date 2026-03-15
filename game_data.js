@@ -14,20 +14,19 @@ export default [{
 }, {
   id: 'tali',
   title: 'Tali',
-  subtitle: 'Playable Web Card Game',
-  bannerImg: '',
+  subtitle: 'Windows Card Game Download',
+  bannerImg: '/tali/banner.png',
   url: '/games/tali',
   nScreens: 0,
   videoUrl: '',
   videoDimensions: [undefined, undefined],
   releaseDate: '',
   description: '<div class="feature-list">\
-                            Tali is now playable in your browser.<br/>It works best on Chrome.<br/><br/>\
+                            Tali is available as a Windows download.<br/><br/>\
                             <ul className="align-left">\
                                 <li key="item0">Battle through a dungeon using a deck of cards</li>\
-                                <li key="item1">Play instantly in your browser</li>\
-                  <li key="item2"><a href="/tali/">Launch Tali</a></li>\
-                  <li key="item3"><a href="/tali/tali-windows.zip">Download the Windows build (.zip)</a></li>\
+                  <li key="item1"><a href="/tali/tali-windows.zip">Download the Windows build (.zip)</a></li>\
+                  <li key="item2">Includes tali.exe and tali.pck</li>\
                             </ul> \
                         </div>'
 }, {

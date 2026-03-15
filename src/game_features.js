@@ -43,6 +43,23 @@ class FeatureStoreButton extends React.Component{
     }
   }
 
+  class FeatureBanner extends React.Component{
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
+
+    render(){
+      if(typeof this.props.src !== 'undefined' && this.props.src.length > 0){
+        return <div className="feature-banner" data-aos="zoom-in" data-aos-duration="400">
+          <img className="feature-banner-image" src={this.props.src} alt={this.props.alt}/>
+        </div>
+      }
+
+      return null;
+    }
+  }
+
   
   class BoxFull extends React.Component{
     constructor(props){
@@ -71,6 +88,7 @@ class FeatureStoreButton extends React.Component{
       if(this.data.id!='default' && this.data.id.length>0){
       return <ErrorBoundary>
      <BoxFull id={this.data.id} inner={<div>
+                   <FeatureBanner src={this.data.bannerImg} alt={this.data.title + " banner"} />
                    <FeatureVideo url={this.data.videoUrl} id={this.data.id} />
                     <div className="content">
                         <header className="align-center" data-aos="slide-left" data-aos-duration="400">
