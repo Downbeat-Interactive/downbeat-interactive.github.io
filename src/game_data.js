@@ -49,7 +49,7 @@ export default [
                             <br/><br/>\
                             <ul className="align-left">\
                                 <li key="item0">Battle through a dungeon using a deck of cards</li>\
-                                <li key="item1"><a href="/tali/tali-windows.zip">Download the Windows build (.zip)</a></li>\
+                                <li key="item1"><a href="https://download-tali-downbeat.s3.us-east-1.amazonaws.com/tali-windows.zip">Download the Windows build (.zip)</a></li>\
                                 <li key="item2">Includes tali.exe and tali.pck</li>\
                             </ul> \
                         </div>'
