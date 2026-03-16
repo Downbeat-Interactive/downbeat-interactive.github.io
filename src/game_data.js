@@ -56,17 +56,17 @@ export default [
     },
     
     {
-        id: 'space-factory',
-        title: 'Space Factory',
-        subtitle: 'Factory... In Space',
+        id: 'probalt',
+        title: 'Probalt',
+        subtitle: 'Little probe builds a big factory... in space!',
         bannerImg: '',
-        url: '/space-factory',
+        url: '/probalt',
         nScreens:0,
         videoUrl:'',
         videoDimensions: [undefined, undefined],
         releaseDate:'TBD',
-        description:    '<div class="feature-list">\
-                            Untitiled Space Factory is a WIP, check back soon!<br/><br/>\
+         description: '<div class="feature-list">\
+                            Porbalt is a WIP, check back soon!<br/><br/>\
                             <ul className="align-left">\
                                 <li key="item0">Factory</li>\
                             </ul> \

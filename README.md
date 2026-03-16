@@ -45,7 +45,7 @@ Downbeat Interactive is a small indie studio specializing in casual mobile games
 - **[Spell Hero](https://downbeat.games/spell-hero)**
   - Magic-themed adventure game
   
-- **[Space Factory](https://downbeat.games/space-factory)**
+- **[Porbalt](https://downbeat.games/probalt)**
   - Space-themed building/management game WIP
 
 ## 🛠️ Technology Stack

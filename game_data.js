@@ -14,7 +14,7 @@ export default [{
 }, {
   id: 'tali',
   title: 'Tali',
-  subtitle: 'Windows Card Game Download',
+  subtitle: 'Rogue-like Card Battler',
   bannerImg: '/tali/banner.png',
   url: '/games/tali',
   nScreens: 0,
@@ -30,17 +30,17 @@ export default [{
                             </ul> \
                         </div>'
 }, {
-  id: 'space-factory',
-  title: 'Space Factory',
-  subtitle: 'Factory... In Space',
+  id: 'probalt',
+  title: 'Probalt',
+  subtitle: 'Little probe builds a big factory... in space!',
   bannerImg: '',
-  url: '/space-factory',
+  url: '/probalt',
   nScreens: 0,
   videoUrl: '',
   videoDimensions: [undefined, undefined],
   releaseDate: 'TBD',
   description: '<div class="feature-list">\
-                            Untitiled Space Factory is a WIP, check back soon!<br/><br/>\
+                            Porbalt is a WIP, check back soon!<br/><br/>\
                             <ul className="align-left">\
                                 <li key="item0">Factory</li>\
                             </ul> \
