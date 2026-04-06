@@ -163,12 +163,18 @@ var settings = {
             pos = x;
 
             // Hide last slide.
+            if(typeof slides[lastPos] === 'undefined' ){
+                return;
+            }
             slides[lastPos].removeClass('top');
 
             if (options.indicators)
                 indicators[lastPos].removeClass('visible');
 
             // Show new slide.
+            if(typeof slides[pos] === 'undefined' ){
+                return;
+            }
             slides[pos].addClass('visible').addClass('top');
 
 
@@ -241,6 +247,9 @@ var settings = {
             ._parallax(options.parallax);
 
         // Initial slide.
+        if(typeof slides[pos] === 'undefined' ){
+                return;
+            }
         slides[pos].addClass('visible').addClass('top');
 
         if (options.indicators)

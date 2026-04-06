@@ -58,67 +58,107 @@ class GamesDropdown extends React.Component {
     super(props);
     this.props = props;
     this.clickExpandGames = this.clickExpandGames.bind(this);
+    this.clickExpandMobile = this.clickExpandMobile.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.rootRef = React.createRef();
     this.state = {
-      listExpanded: false
+      listExpanded: false,
+      mobileListExpanded: false
     };
   }
-  clickExpandGames(e) {
-    // e.preventDefault();
-    // e.stopPropagation();
-    this.setState((state, props) => ({
-      listExpanded: !this.state.listExpanded
-    }));
-    var list = document.getElementById("game-list");
-    var dropdown = document.getElementById("games-dropdown");
-    if (this.state.listExpanded) {
-      dropdown.classList.remove("fa-chevron-down");
-      dropdown.classList.add("fa-chevron-up");
-      list.classList.add("show");
-      list.classList.remove("hide");
-      var index = 0;
-      list.childNodes.forEach(element => {
-        element.classList.remove("hide");
-        element.classList.add("show-" + index);
-        index++;
-      });
-    } else {
-      dropdown.classList.remove("fa-chevron-up");
-      dropdown.classList.add("fa-chevron-down");
-      list.classList.add("hide");
-      list.classList.remove("show");
-      var index = 0;
-      list.childNodes.forEach(element => {
-        element.classList.add("hide");
-        element.classList.remove("show-" + index);
-        index++;
-      });
-    }
-  }
   componentDidMount() {
-    document.getElementById("games-li").addEventListener("click", this.clickExpandGames);
+    if (this.rootRef.current) this.rootRef.current.addEventListener('click', this.handleMenuClick);
+  }
+  componentWillUnmount() {
+    if (this.rootRef.current) this.rootRef.current.removeEventListener('click', this.handleMenuClick);
+  }
+  handleMenuClick(e) {
+    const target = e.target;
+    const gamesToggle = target.closest && target.closest('.game-list-toggle');
+    if (gamesToggle && this.rootRef.current.contains(gamesToggle)) {
+      this.clickExpandGames(e);
+      return;
+    }
+    const mobileToggle = target.closest && target.closest('.game-list-group-toggle');
+    if (mobileToggle && this.rootRef.current.contains(mobileToggle)) this.clickExpandMobile(e);
+  }
+  clickExpandGames(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState(state => ({
+      listExpanded: !state.listExpanded,
+      mobileListExpanded: state.listExpanded ? false : state.mobileListExpanded
+    }));
+  }
+  clickExpandMobile(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState(state => ({
+      mobileListExpanded: !state.mobileListExpanded
+    }));
   }
   render() {
     const pageData = Array.isArray(this.props.data) ? this.props.data : [];
     const games = [...mobileData, ...pageData].filter((game, index, array) => game.title.length > 0 && array.findIndex(item => item.id == game.id) == index);
+    const mobileGameIds = new Set(mobileData.map(game => game.id));
+    const mobileGames = games.filter(game => mobileGameIds.has(game.id));
+    const directGames = games.filter(game => !mobileGameIds.has(game.id));
+    const topLevelItems = [];
+    if (mobileGames.length > 0) {
+      topLevelItems.push({
+        key: 'mobile-games',
+        title: 'Mobile',
+        type: 'group',
+        games: mobileGames
+      });
+    }
+    directGames.forEach(game => {
+      topLevelItems.push({
+        key: game.id,
+        title: game.title,
+        type: 'link',
+        url: game.url
+      });
+    });
     return /*#__PURE__*/React.createElement("li", {
+      ref: this.rootRef,
       id: "games-li",
       className: "game-list",
       key: "games"
-    }, /*#__PURE__*/React.createElement("a", null, " ", /*#__PURE__*/React.createElement("i", {
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "game-list-toggle"
+    }, " ", /*#__PURE__*/React.createElement("i", {
       class: "fas fa-gamepad"
     }), "    Games   ", /*#__PURE__*/React.createElement("i", {
       id: "games-dropdown",
-      class: "fas fa-chevron-down"
+      class: "fas " + (this.state.listExpanded ? "fa-chevron-up" : "fa-chevron-down")
     })), /*#__PURE__*/React.createElement("ul", {
       id: "game-list",
-      className: "links align-right hide"
-    }, games.map(game => /*#__PURE__*/React.createElement("li", {
-      className: "game-list-item hide",
+      className: "links align-right " + (this.state.listExpanded ? "show" : "hide")
+    }, topLevelItems.map((item, index) => item.type == 'group' ? /*#__PURE__*/React.createElement("li", {
+      className: "game-list-item game-list-group " + (this.state.listExpanded ? "show-" + index : "hide"),
+      key: item.key,
+      title: item.title
+    }, /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "game-list-group-toggle"
+    }, item.title, " ", /*#__PURE__*/React.createElement("i", {
+      className: "fas " + (this.state.mobileListExpanded ? "fa-chevron-up" : "fa-chevron-down")
+    })), /*#__PURE__*/React.createElement("ul", {
+      className: "game-sub-list " + (this.state.mobileListExpanded ? "show" : "hide")
+    }, item.games.map(game => /*#__PURE__*/React.createElement("li", {
       key: game.id,
       title: game.title
     }, /*#__PURE__*/React.createElement("a", {
       href: game.url
-    }, game.title)))));
+    }, game.title))))) : /*#__PURE__*/React.createElement("li", {
+      className: "game-list-item " + (this.state.listExpanded ? "show-" + index : "hide"),
+      key: item.key,
+      title: item.title
+    }, /*#__PURE__*/React.createElement("a", {
+      href: item.url
+    }, item.title)))));
   }
 }
 class Header extends React.Component {
@@ -186,6 +226,14 @@ class Socials extends React.Component {
       className: "label "
     }, "Itch"))), /*#__PURE__*/React.createElement("li", {
       key: "item5"
+    }, /*#__PURE__*/React.createElement("a", {
+      target: "_blank ",
+      href: "https://discord.gg/9BH7a6QEh5",
+      className: "icon fa-discord "
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "label "
+    }, "Discord"))), /*#__PURE__*/React.createElement("li", {
+      key: "item6"
     }, /*#__PURE__*/React.createElement("a", {
       target: "_blank ",
       href: "https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c",

@@ -55,63 +55,101 @@ class NavigationMenu extends React.Component{
       super(props);
       this.props = props;
       this.clickExpandGames = this.clickExpandGames.bind(this);
-      this.state = {listExpanded: false};
+      this.clickExpandMobile = this.clickExpandMobile.bind(this);
+      this.handleMenuClick = this.handleMenuClick.bind(this);
+      this.rootRef = React.createRef();
+      this.state = {listExpanded: false, mobileListExpanded: false};
       
     }
 
 
+  componentDidMount(){
+    if(this.rootRef.current)
+      this.rootRef.current.addEventListener('click', this.handleMenuClick);
+  }
+
+  componentWillUnmount(){
+    if(this.rootRef.current)
+      this.rootRef.current.removeEventListener('click', this.handleMenuClick);
+  }
+
+  handleMenuClick(e){
+    const target = e.target;
+    const gamesToggle = target.closest && target.closest('.game-list-toggle');
+
+    if(gamesToggle && this.rootRef.current.contains(gamesToggle)){
+      this.clickExpandGames(e);
+      return;
+    }
+
+    const mobileToggle = target.closest && target.closest('.game-list-group-toggle');
+
+    if(mobileToggle && this.rootRef.current.contains(mobileToggle))
+      this.clickExpandMobile(e);
+  }
+
+
   clickExpandGames(e){
-    // e.preventDefault();
-    // e.stopPropagation();
-    this.setState((state,props) => ({ listExpanded: !this.state.listExpanded    }));
-
-    var list = document.getElementById("game-list");
-
-    var dropdown = document.getElementById("games-dropdown");
-    if(this.state.listExpanded){
-      dropdown.classList.remove("fa-chevron-down");
-      dropdown.classList.add("fa-chevron-up");
-      list.classList.add("show");
-      list.classList.remove("hide");
-      var index = 0;
-      list.childNodes.forEach(element => {
-        element.classList.remove("hide");
-        element.classList.add("show-"+index);
-        index++;
-      });
-    }
-    else{
-      dropdown.classList.remove("fa-chevron-up");
-      dropdown.classList.add("fa-chevron-down");
-      list.classList.add("hide");
-      list.classList.remove("show");
-      var index = 0;
-      list.childNodes.forEach(element => {
-        element.classList.add("hide");
-        element.classList.remove("show-"+index);
-        index++;
-      });
-    }
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState((state) => ({
+      listExpanded: !state.listExpanded,
+      mobileListExpanded: state.listExpanded ? false : state.mobileListExpanded
+    }));
 
 
   }
-  componentDidMount() {
-   document.getElementById("games-li").addEventListener("click",this.clickExpandGames);
-  
-
+  clickExpandMobile(e){
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState((state) => ({ mobileListExpanded: !state.mobileListExpanded }));
   }
     render(){
           const pageData = Array.isArray(this.props.data) ? this.props.data : [];
           const games = [...mobileData, ...pageData].filter((game, index, array) => (
             game.title.length>0 && array.findIndex(item => item.id == game.id) == index
           ));
+          const mobileGameIds = new Set(mobileData.map(game => game.id));
+          const mobileGames = games.filter(game => mobileGameIds.has(game.id));
+          const directGames = games.filter(game => !mobileGameIds.has(game.id));
+          const topLevelItems = [];
 
-          return <li id= "games-li" className="game-list" key = "games">
-            <a> <i class="fas fa-gamepad"></i>    Games   <i id="games-dropdown" class="fas fa-chevron-down"></i></a>
-                <ul id="game-list" className="links align-right hide">
-                    {games.map(game => (
-                      <li className="game-list-item hide"key={game.id} title={game.title}>
-                        <a href ={game.url}>{game.title}</a>
+          if(mobileGames.length > 0){
+            topLevelItems.push({
+              key: 'mobile-games',
+              title: 'Mobile',
+              type: 'group',
+              games: mobileGames
+            });
+          }
+
+          directGames.forEach(game => {
+            topLevelItems.push({
+              key: game.id,
+              title: game.title,
+              type: 'link',
+              url: game.url
+            });
+          });
+
+          return <li ref={this.rootRef} id= "games-li" className="game-list" key = "games">
+            <button type="button" className="game-list-toggle"> <i class="fas fa-gamepad"></i>    Games   <i id="games-dropdown" class={"fas "+(this.state.listExpanded?"fa-chevron-up":"fa-chevron-down")}></i></button>
+                <ul id="game-list" className={"links align-right "+(this.state.listExpanded?"show":"hide")}>
+                    {topLevelItems.map((item, index) => (
+                      item.type == 'group' ?
+                      <li className={"game-list-item game-list-group "+(this.state.listExpanded?"show-"+index:"hide")} key={item.key} title={item.title}>
+                        <button type="button" className="game-list-group-toggle">{item.title} <i className={"fas "+(this.state.mobileListExpanded?"fa-chevron-up":"fa-chevron-down")}></i></button>
+                        <ul className={"game-sub-list "+(this.state.mobileListExpanded?"show":"hide")}>
+                          {item.games.map(game => (
+                            <li key={game.id} title={game.title}>
+                              <a href ={game.url}>{game.title}</a>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                      :
+                      <li className={"game-list-item "+(this.state.listExpanded?"show-"+index:"hide")} key={item.key} title={item.title}>
+                        <a href ={item.url}>{item.title}</a>
                       </li>
                     ))}
               </ul>
@@ -192,6 +230,15 @@ class NavigationMenu extends React.Component{
                       </a>
                     </li>
                     <li key="item5">
+                        <a
+                          target="_blank "
+                          href="https://discord.gg/9BH7a6QEh5"
+                          className="icon fa-discord "
+                        >
+                          <span className="label ">Discord</span>
+                        </a>
+                      </li>
+                      <li key="item6">
                       <a
                         target="_blank "
                         href="https://us7.list-manage.com/contact-form?u=38cc654b1acbc51ccf30871b4&form_id=e7f0d3184720285b9c1a3012f721277c"

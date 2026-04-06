@@ -1,11 +1,343 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<title>TALI</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+html, body, #canvas {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
 
-<head>
-    <title>Downbeat Interactive | Tali</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/assets/css/main.css" />
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	color: white;
+	background:
+		radial-gradient(circle at top, rgba(76, 34, 34, 0.72), rgba(6, 10, 12, 0.98) 58%),
+		#040607;
+	overflow: hidden;
+	touch-action: none;
+	font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+body.game-running {
+	overflow: auto;
+}
+
+#canvas {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+#canvas:fullscreen,
+#canvas:-webkit-full-screen,
+#canvas:-moz-full-screen,
+#canvas:-ms-fullscreen {
+	width: 100vw;
+	height: 100vh;
+	max-width: none;
+	max-height: none;
+	background: #000;
+}
+
+#canvas:focus {
+	outline: none;
+}
+
+#overlay {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	background: rgba(4, 7, 8, 0.00);
+	backdrop-filter: blur(10px);
+	z-index: 10;
+}
+
+#panel {
+	width: min(440px, 100%);
+	padding: 28px 24px;
+	border: 1px solid rgba(255, 173, 173, 0.18);
+	border-radius: 20px;
+	background: linear-gradient(180deg, rgba(18, 28, 30, 0.96), rgba(9, 14, 16, 0.96));
+	box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+	text-align: center;
+}
+
+
+
+#title {
+	margin: 0 0 10px;
+	font-size: 28px;
+	letter-spacing: 0.04em;
+}
+
+#subtitle {
+	margin: 0 0 20px;
+	color: rgba(232, 244, 241, 0.82);
+	font-size: 15px;
+	line-height: 1.45;
+}
+
+#start-button {
+	width: 100%;
+	padding: 14px 16px;
+	border: none;
+	border-radius: 999px;
+	background: linear-gradient(180deg, #ad3d3d, #9d571e);
+	color: #052018;
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 120ms ease, filter 120ms ease, opacity 120ms ease;
+}
+
+#start-button:hover,
+#start-button:focus-visible {
+	transform: translateY(-1px);
+	filter: brightness(1.04);
+}
+
+#start-button[disabled] {
+	cursor: wait;
+	opacity: 0.7;
+	transform: none;
+}
+
+#progress {
+	width: 100%;
+	height: 10px;
+	accent-color: #f35656;
+	display: none;
+}
+
+#status {
+	margin-top: 12px;
+	min-height: 1.4em;
+	color: rgba(232, 244, 241, 0.78);
+	font-size: 14px;
+	line-height: 1.4;
+	white-space: pre-wrap;
+	text-align: center;
+}
+
+.hidden {
+	display: none !important;
+}
+
+#loading-overlay {
+	position: absolute;
+	inset: 0;
+	display: none;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 24px;
+	pointer-events: none;
+	z-index: 2;
+}
+
+#loading-overlay.visible {
+	display: flex;
+}
+
+#loading-panel {
+	width: min(420px, calc(100% - 48px));
+	padding: 16px 18px;
+	border: 1px solid rgba(255, 173, 173, 0.18);
+	border-radius: 18px;
+	background: rgba(9, 14, 16, 0.86);
+	box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+	backdrop-filter: blur(8px);
+}
+      :root {
+        color-scheme: dark;
+        --page-bg: #120707;
+        --panel-bg: rgba(21, 8, 8, 0.86);
+        --panel-border: rgba(255, 110, 110, 0.22);
+        --text-main: #f1fbf8;
+        --text-muted: rgba(241, 251, 248, 0.74);
+        --accent: #f35656;
+        --accent-strong: #b11b1b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 20px;
+        background:
+          radial-gradient(circle at top, rgba(116, 46, 46, 0.45), transparent 42%),
+          linear-gradient(180deg, #0b1719 0%, var(--page-bg) 100%);
+        color: var(--text-main);
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      .page {
+		width: min(960px, 100%);
+      }
+
+	  body.game-running .page {
+		width: fit-content;
+		min-width: 1280px;
+		max-width: none;
+	  }
+	  .centered {
+		display: flex;
+		flex-direction: column;	
+		align-items: center;
+		justify-content: center;
+			  }		
+	.card {
+        overflow: hidden;
+        border: 1px solid var(--panel-border);
+        border-radius: 28px;
+        background: var(--panel-bg);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+        backdrop-filter: blur(10px);
+		position: relative;
+      }
+
+	  body.game-running .card {
+		width: 1280px;
+		min-width: 1280px;
+		min-height: 720px;
+		display: flex;
+		flex-direction: column;
+		backdrop-filter: none;
+		border-color: transparent;
+		box-shadow: none;
+		isolation: isolate;
+	  }
+
+	  body.game-running #canvas:fullscreen,
+	  body.game-running #canvas:-webkit-full-screen,
+	  body.game-running #canvas:-moz-full-screen,
+	  body.game-running #canvas:-ms-fullscreen {
+		width: 100vw;
+		height: 100vh;
+	  }
+
+      .banner {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+	  .splash {
+	margin-bottom: 18px;
+}
+
+      .content {
+        padding: 28px;
+      }
+
+	  body.game-running .content {
+		display: none;
+	  }
+
+	  body.game-running #canvas {
+		position: absolute !important;
+		left: 0 !important;
+		top: 0 !important;
+	  }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 4vw, 3rem);
+        letter-spacing: 0.04em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 999px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 120ms ease, filter 120ms ease, background 120ms ease;
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-1px);
+        filter: brightness(1.04);
+      }
+
+      .button-primary {
+        background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+        color: #210606;
+      }
+
+      .button-secondary {
+        border: 1px solid rgba(255, 110, 110, 0.28);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text-main);
+      }
+
+      .note {
+        margin-top: 16px;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 640px) {
+        .content {
+          padding: 22px;
+        }
+
+        .actions {
+			width: 100%;
+          flex-direction: column;
+		  align-items: center;
+			
+        }
+
+        .button {
+          width: 100%;
+        }
+		.icon-button img {
+    margin-left: 12px; /* Adds 8px of space to the right of the image */
+    vertical-align: middle; /* Helps align the image and text vertically */
+}
+      }
+    </style>
+		
+	</head>
+
+
+
+
+    <!-- <link rel="stylesheet" href="/assets/css/main.css" /> -->
     <script src="https://kit.fontawesome.com/c29350930a.js" crossorigin="anonymous"></script>
 
 
@@ -19,18 +351,30 @@
     <meta name="theme-color" content="#ffffff">
 
      <!--React-->
-        <!--PRODUCTION-->
-        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-        <!--DEVELOPMENT-->
-        <!-- <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>  
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script> -->
+	 <!--PRODUCTION-->
+	 <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+	 <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+	 <!--DEVELOPMENT-->
+	 <!-- <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>  
+	 <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script> -->
+	 
+	 <!--Mailchimp-->	
+	 <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/38cc654b1acbc51ccf30871b4/b437cd8b662ae70c1a6c0c6c4.js");</script></head>	
 
-    <!--Mailchimp-->
-<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/38cc654b1acbc51ccf30871b4/b437cd8b662ae70c1a6c0c6c4.js");</script></head>
+	 <!-- Global site tag (gtag.js) - Google Analytics -->
+	 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169262722-1"></script>
+	 <script>
+		 window.dataLayer = window.dataLayer || [];
+	 
+		 function gtag() {
+			 dataLayer.push(arguments);
+		 }
+		 gtag('js', new Date());
+	 
+		 gtag('config', 'UA-169262722-1');
+	 </script>
+	 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-169262722-1"></script>
 
 
 <script>
@@ -38,21 +382,463 @@
 
     function gtag() {
         dataLayer.push(arguments);
-    }
+    }	
     gtag('js', new Date());
 
-    gtag('config', 'UA-169262722-1');
+    gtag('config', 'UA-169262722-1');	
 </script>
 
+	<body>
+		<main class="page">
+			
+			<noscript>
+				Your browser does not support JavaScript.
+			</noscript>	
+			<section class="card">
+				<img id="banner"  class="banner" src="banner.png" onerror="if (this.src != 'index.png') this.src = 'index.png';" alt="Tali banner">
+				<canvas id="canvas" class="hidden">
+					Your browser does not support the canvas tag.
+					</canvas>	
+					<div id="loading-overlay" aria-live="polite">
+						<div id="loading-panel">
+							<progress id="progress"></progress>
+							<div id="status"></div>
+						</div>	
+					</div>	
+					<div class="content centered">
+						More info coming soon.
+						<!-- <p id="subtitle">Tap or click to start.</p> -->
+						<!-- <button id="start-button" type="button">Start</button> -->
+				<!-- <p>Tali is available as a Windows download. The zip includes tali.exe and tali.pck.</p> -->		
+				<!-- <div class="actions"> -->
+					<!-- <a class="button button-secondary" href="https://download-tali-downbeat.s3.us-east-1.amazonaws.com/tali-windows.zip" download="tali-windows.zip">Download <i style="margin-left: 12px;" class="fa fa-windows icon-button"></i></a> -->
+					<!-- <a class="button button-secondary" href="/games/tali">View game details</a> -->
+				<!-- </div>	 -->
+			</div>		
+      </section>  
+    </main>  
+	
+	
+	<script src="index.js"></script>	
+<script>
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":1,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":285181856,"index.wasm":38057390},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+GODOT_CONFIG.canvasResizePolicy = 0;
+const startButton = document.getElementById("start-button");
+const progressBar = document.getElementById("progress");
+const status = document.getElementById("status");
+const loadingOverlay = document.getElementById("loading-overlay");
+const banner = document.getElementById("banner");
+const page = document.querySelector(".page");
+const card = document.querySelector(".card");
+let canvas = document.getElementById("canvas");
+let canvasSyncTimeoutId = 0;
+let canvasSyncFrameId = 0;
 
-<body>
+const MIN_GAME_WIDTH = 1280;
+const MIN_GAME_HEIGHT = 720;
 
-    <div id="app_container" game="tali"></div>
-    <script src="/game_page.js" type="module"></script>
 
-    
+function applyCanvasSize(width, height) {
+	var clampedWidth = Math.max(Math.round(width), 1);
+	var clampedHeight = Math.max(Math.round(height), 1);
+	canvas.width = clampedWidth;
+	canvas.height = clampedHeight;
+	canvas.style.background = "#000";
+	canvas.style.width = clampedWidth + "px";
+	canvas.style.height = clampedHeight + "px";
+	canvas.style.left = "0px";
+	canvas.style.top = "0px";
+}
 
-    <!-- Scripts -->
+
+function applyFullscreenLayout(isFullscreen) {
+	if (page == null) {
+		throw new Error("Expected .page container for web shell layout.");
+	}
+	if (card == null) {
+		throw new Error("Expected .card container for web shell layout.");
+	}
+	if (isFullscreen) {
+		page.style.width = "100vw";
+		page.style.height = "100vh";
+		page.style.minWidth = "0";
+		page.style.maxWidth = "none";
+		card.style.width = "100vw";
+		card.style.height = "100vh";
+		card.style.minWidth = "0";
+		card.style.minHeight = "0";
+		card.style.borderRadius = "0";
+		card.style.border = "0";
+		card.style.boxShadow = "none";
+		card.style.background = "#000";
+		return;
+	}
+	page.style.removeProperty("width");
+	page.style.removeProperty("height");
+	page.style.removeProperty("min-width");
+	page.style.removeProperty("max-width");
+	card.style.removeProperty("width");
+	card.style.removeProperty("height");
+	card.style.removeProperty("min-width");
+	card.style.removeProperty("min-height");
+	card.style.removeProperty("border-radius");
+	card.style.removeProperty("border");
+	card.style.removeProperty("box-shadow");
+	card.style.removeProperty("background");
+}
+
+
+function syncCanvasSize() {
+	if (!document.body.classList.contains("game-running")) {
+		applyFullscreenLayout(false);
+		return;
+	}
+	if (isGameFullscreen()) {
+		applyFullscreenLayout(true);
+		applyCanvasSize(window.innerWidth, window.innerHeight);
+		return;
+	}
+	applyFullscreenLayout(false);
+	if (card == null) {
+		throw new Error("Expected .card container for embedded web canvas sizing.");
+	}
+	applyCanvasSize(
+		Math.max(card.clientWidth, MIN_GAME_WIDTH),
+		Math.max(card.clientHeight, MIN_GAME_HEIGHT),
+	);
+}
+
+
+function scheduleCanvasSync() {
+	if (canvasSyncFrameId !== 0) {
+		window.cancelAnimationFrame(canvasSyncFrameId);
+	}
+	if (canvasSyncTimeoutId !== 0) {
+		window.clearTimeout(canvasSyncTimeoutId);
+	}
+	canvasSyncFrameId = window.requestAnimationFrame(function() {
+		canvasSyncFrameId = 0;
+		syncCanvasSize();
+		canvasSyncTimeoutId = window.setTimeout(function() {
+			canvasSyncTimeoutId = 0;
+			syncCanvasSize();
+		}, 120);
+	});
+}
+
+
+function setGameRunning(isRunning) {
+	document.body.classList.toggle("game-running", isRunning);
+	startButton.classList.toggle("hidden", isRunning);
+	if (page == null) {
+		throw new Error("Expected .page container for web shell layout.");
+	}
+	if (card == null) {
+		throw new Error("Expected .card container for web shell layout.");
+	}
+	if (isRunning) {
+		scheduleCanvasSync();
+		return;
+	}
+	applyFullscreenLayout(false);
+}
+
+
+
+const trackedAudioContexts = [];
+let isStarting = false;
+let engine = null;
+
+const NativeAudioContext = window.AudioContext || window.webkitAudioContext;
+
+if (NativeAudioContext) {
+	function TrackingAudioContext() {
+		const context = new NativeAudioContext(...arguments);
+		trackedAudioContexts.push(context);
+		return context;
+	}
+
+	TrackingAudioContext.prototype = NativeAudioContext.prototype;
+	window.AudioContext = TrackingAudioContext;
+	if (window.webkitAudioContext) {
+		window.webkitAudioContext = TrackingAudioContext;
+	}
+}
+
+function setStatus(text) {
+	status.textContent = text;
+}
+
+function showFailureNotice(err) {
+	console.error(err);
+	resetPageToIdleState();
+	const message = err instanceof Error ? err.message : String(err);
+	setStatus(message || "An unknown error occurred while starting the game.");
+}
+
+function resumeTrackedAudioContexts() {
+	if (trackedAudioContexts.length === 0) {
+		return Promise.resolve();
+	}
+
+	return Promise.allSettled(trackedAudioContexts.map(function(context) {
+		if (!context || typeof context.resume !== "function") {
+			return Promise.resolve();
+		}
+		if (context.state === "running") {
+			return Promise.resolve();
+		}
+		return context.resume();
+	}));
+}
+
+
+function showCanvas() {
+	banner.classList.add("hidden");
+	canvas.classList.remove("hidden");
+}
+
+function hideCanvas() {
+	banner.classList.remove("hidden");
+	canvas.classList.add("hidden");
+}
+
+
+function replaceCanvasElement() {
+	var nextCanvas = canvas.cloneNode(false);
+	nextCanvas.className = "hidden";
+	nextCanvas.removeAttribute("style");
+	nextCanvas.width = MIN_GAME_WIDTH;
+	nextCanvas.height = MIN_GAME_HEIGHT;
+	canvas.replaceWith(nextCanvas);
+	canvas = nextCanvas;
+}
+
+
+function hideProgressAndStatus() {
+	if (loadingOverlay == null) {
+		throw new Error("Expected #loading-overlay container for web shell loading UI.");
+	}
+	loadingOverlay.classList.remove("visible");
+	progressBar.classList.add("hidden");
+	progressBar.style.display = "none";
+	progressBar.removeAttribute("value");
+	progressBar.removeAttribute("max");
+	setStatus("");
+}
+
+
+function resetPageToIdleState() {
+	isStarting = false;
+	setGameRunning(false);
+	startButton.disabled = false;
+	hideProgressAndStatus();
+	replaceCanvasElement();
+	hideCanvas();
+	if (typeof canvas.blur === "function") {
+		canvas.blur();
+	}
+	if (typeof startButton.focus === "function") {
+		startButton.focus();
+	}
+}
+
+
+function getFullscreenElement() {
+	return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || null;
+}
+
+function requestGameFullscreen() {
+	var requestFullscreen = canvas.requestFullscreen || canvas.webkitRequestFullscreen || canvas.mozRequestFullScreen || canvas.msRequestFullscreen;
+	if (typeof requestFullscreen !== "function") {
+		return false;
+	}
+
+	var userActivation = navigator.userActivation || null;
+	if (userActivation != null && userActivation.isActive === false) {
+		return false;
+	}
+
+	try {
+		var requestResult = requestFullscreen.call(canvas);
+		if (requestResult != null && typeof requestResult.catch === "function") {
+			requestResult.catch(function(error) {
+				console.error("Failed to enter fullscreen.", error);
+			});
+		}
+		if (typeof canvas.focus === "function") {
+			canvas.focus();
+		}
+		scheduleCanvasSync();
+		return true;
+	} catch (error) {
+		console.error("Failed to enter fullscreen.", error);
+		return false;
+	}
+}
+
+function isGameFullscreen() {
+	return getFullscreenElement() === canvas;
+}
+
+function exitFullscreenIfNeeded() {
+	var fullscreenElement = getFullscreenElement();
+	if (fullscreenElement == null) {
+		return Promise.resolve();
+	}
+
+	var exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+	if (typeof exitFullscreen !== "function") {
+		return Promise.resolve();
+	}
+
+	try {
+		return Promise.resolve(exitFullscreen.call(document)).catch(function(error) {
+			console.error("Failed to exit fullscreen before quitting.", error);
+		});
+	} catch (error) {
+		console.error("Failed to exit fullscreen before quitting.", error);
+		return Promise.resolve();
+	}
+}
+
+var isQuitting = false;
+
+
+function finalizeEngineShutdown(activeEngine) {
+	if (engine === activeEngine) {
+		engine = null;
+	}
+	if (activeEngine != null && typeof activeEngine.unload === "function") {
+		try {
+			activeEngine.unload();
+		} catch (error) {
+			console.error("Failed to unload engine resources.", error);
+		}
+	}
+	resetPageToIdleState();
+	isQuitting = false;
+}
+
+
+function requestEngineShutdown() {
+	if (engine == null) {
+		resetPageToIdleState();
+		isQuitting = false;
+		return Promise.resolve();
+	}
+
+	var activeEngine = engine;
+	if (typeof activeEngine.requestQuit === "function") {
+		try {
+			activeEngine.requestQuit();
+		} catch (error) {
+			console.error("Failed to request engine quit.", error);
+			finalizeEngineShutdown(activeEngine);
+			return Promise.resolve();
+		}
+	}
+
+	return new Promise(function(resolve) {
+		var remainingPolls = 40;
+
+		function pollForShutdown() {
+			if (activeEngine.rtenv == null || remainingPolls <= 0) {
+				if (remainingPolls <= 0 && activeEngine.rtenv != null) {
+					console.warn("Engine shutdown did not complete before reset; forcing shell reset.");
+				}
+				finalizeEngineShutdown(activeEngine);
+				resolve();
+				return;
+			}
+
+			remainingPolls -= 1;
+			window.setTimeout(pollForShutdown, 50);
+		}
+
+		pollForShutdown();
+	});
+}
+
+function quitRequested() {
+	if (isQuitting) {
+		return;
+	}
+	isQuitting = true;
+
+	exitFullscreenIfNeeded().finally(function() {
+		window.setTimeout(function() {
+			requestEngineShutdown();
+		}, 0);
+	});
+}
+
+function startGameFromUserGesture() {
+	banner.classList.add("hidden");
+	console.log("Starting game...");
+	if (isStarting) {
+		return;
+	}
+	isStarting = true;
+	setGameRunning(true);
+	scheduleCanvasSync();
+	startButton.disabled = true;
+	// hide banner
+	showCanvas();
+
+	if (loadingOverlay == null) {
+		throw new Error("Expected #loading-overlay container for web shell loading UI.");
+	}
+	loadingOverlay.classList.add("visible");
+	progressBar.classList.remove("hidden");
+	progressBar.style.display = "block";
+	setStatus("Loading...");
+	if (engine == null) {
+		engine = new Engine(GODOT_CONFIG);
+	}
+
+	resumeTrackedAudioContexts().then(function() {
+		return engine.startGame({
+			canvas: canvas,
+		onProgress: function(current, total) {
+			if (current > 0 && total > 0) {
+				progressBar.value = current;
+				progressBar.max = total;
+				setStatus("Loading... " + Math.round((current / total) * 100) + "%");
+			} else {
+				progressBar.removeAttribute("value");
+				progressBar.removeAttribute("max");
+				setStatus("Loading...");
+			}
+		},
+		});
+	}).then(function() {
+		hideProgressAndStatus();
+		return resumeTrackedAudioContexts();
+	}).catch(showFailureNotice);
+}
+
+startButton.addEventListener("click", startGameFromUserGesture);
+startButton.addEventListener("touchend", function(event) {
+	if (event.cancelable) {
+		event.preventDefault();
+	}
+	startGameFromUserGesture();
+}, { passive: false });
+window.addEventListener("keydown", function(event) {
+	if (event.key === "Enter" || event.key === " ") {
+		startGameFromUserGesture();
+	}
+});
+window.addEventListener("resize", scheduleCanvasSync);
+document.addEventListener("fullscreenchange", scheduleCanvasSync);
+document.addEventListener("webkitfullscreenchange", scheduleCanvasSync);
+document.addEventListener("mozfullscreenchange", scheduleCanvasSync);
+document.addEventListener("MSFullscreenChange", scheduleCanvasSync);
+
+
+		</script>
+		    <!-- Scripts -->
     <script src="/assets/js/jquery.min.js "></script>
     <script src="/assets/js/jquery.scrollex.min.js "></script>
     <script src="/assets/js/skel.min.js "></script>
@@ -61,7 +847,7 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
    
-
-</body>
-
+	</body>
 </html>
+
+
